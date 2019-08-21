@@ -1,15 +1,19 @@
 {
-  "name": "FullStackProject",
+  "name": "fullstackproject",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "dependencies": {
     "ejs": "^2.6.2",
     "express": "^4.17.1",
+    "pg": "^7.12.1",
     "sequelize": "^5.15.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  },
   "scripts": {
+    "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

@@ -16,7 +16,7 @@ app.set('views', './views');
 
 //Routes
 app.get('/', (req, res, next) => {
-  res.json('Hello World');
+  res.send('Hello World');
 });
 
 
