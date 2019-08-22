@@ -10,11 +10,12 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const db = require('./models');
 const app = express();
 
-//Connect sequelize session to our sequelize db
+//* Connect sequelize session to our sequelize db
 var myStore = new SequelizeStore({
   db: db.sequelize
 });
-//set the store to myStore where we connect the DB details
+
+//* set the store to myStore where we connect the DB details
 app.use(session({
   secret: 'mySecret',
   resave: false,
@@ -23,7 +24,6 @@ app.use(session({
 }));
 
 myStore.sync();
-
 app.use(bodyParser.urlencoded({ extended: false }))
 
 //Middleware set up EJS & static
@@ -42,6 +42,17 @@ app.get('/signup', (req, res, next) => {
   res.render('signup');
 });
 
+app.get('/survey', (req, res, next) => {
+  res.render('survey', {})
+})
+
+
+
+
+/*
+  !Post Routes
+  TODO: Implement all of the post routes
+*/
 app.post('/signup', (req, res, next) => {
   var email = req.body.email;
   var password = req.body.password;
