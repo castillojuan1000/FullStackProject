@@ -38,6 +38,15 @@ app.get('/', (req, res, next) => {
   res.send('Hello World');
 });
 
+
+app.get('/signup', (req, res) =>{
+  if(req.session.user_id !== undefined){ // check and see if the user has userID
+    res.redirect("/survey"); // then send them to the survey page 
+    return; 
+}
+res.render('signup',{title: 'Sign up here'}) // this allows the request to be sent back to the user 
+})
+
 app.post('/signup', (req, res, next) => {
   var email = req.body.email;
   var password = req.body.password;
