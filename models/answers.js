@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
 
     answers.belongsTo(models.surveys);
-    answers.belongsToMany(models.users, {through:'surveys' , as: 'answer'});
+    answers.belongsToMany(models.users, {through:'surveys'});
   };
   return answers;
 };

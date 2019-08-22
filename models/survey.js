@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     user_id: DataTypes.INTEGER,
   }, {});
   survey.associate = function (models) {
-    survey.belongTo(models.user);
+    survey.belongsTo(models.users); //? is this the right association? 
   };
   return survey;
 };
