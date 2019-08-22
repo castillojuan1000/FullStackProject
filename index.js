@@ -50,6 +50,17 @@ app.post('/signup', (req, res, next) => {
   })
 })
 
+app.get('/signOut', (req, res, next) => {
+  req.session.destroy(() => {
+    res.redirect('/login')
+  })
+})
+
+app.get('/home', (req, res, next) => {
+  res.render('home');
+})
+
+
 app.listen(process.env.PORT || 3000, function () {
   console.log('Server running on port 3000');
 });
