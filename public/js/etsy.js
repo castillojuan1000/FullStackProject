@@ -1,4 +1,4 @@
-const api_key = 'API_KEY_HERE';
+const api_key = '93jqxwkb7mqslat27k6yi91j';
 
 //API pagination vars
 
@@ -16,6 +16,7 @@ let listings = {}; //additional information
 On page load bind the search bar with the request function
 */
 $(document).ready(function() {
+    GenerateRequest()
     $('#etsy-search').bind('submit', function() {
         GenerateRequest()
         $('#etsy-images').empty();
@@ -29,7 +30,8 @@ $(document).ready(function() {
 Get the search terms from the bar and generate a url
 */
 function GenerateRequest() {
-    terms = $('#etsy-terms').val();
+    //terms = $('#etsy-terms').val();
+    terms = 'tshirts';
     etsyURL = "https://openapi.etsy.com/v2/listings/active.js?keywords="+
         terms+"&limit=12&includes=Images:1&api_key="+api_key;
     return SearchEtsy(etsyURL);
