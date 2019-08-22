@@ -37,6 +37,12 @@ app.set('views', './views');
   !GET ROUTES
   TODO: Implement all of the GET routes
 */
+app.get('/', (req, res, next) => {
+  res.redirect('/welcome');
+})
+app.get('/welcome', (req, res, next) => {
+  res.render('welcome')
+})
 
 app.get('/home', (req, res, next) => {
   res.render('home');
