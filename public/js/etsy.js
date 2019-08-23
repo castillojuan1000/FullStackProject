@@ -1,4 +1,4 @@
-const api_key = 'API_KEY_HERE';
+const api_key = '93jqxwkb7mqslat27k6yi91j';
 
 //API pagination vars
 
@@ -15,11 +15,11 @@ let listings = {}; //additional information
 /*
 On page load bind the search bar with the request function
 */
-$(document).ready(function() {
-    $('#etsy-search').bind('submit', function() {
+$(document).ready(function () {
+    $('#etsy-search').bind('submit', function () {
         GenerateRequest()
         $('#etsy-images').empty();
-        $('<p></p>').text('Searching for '+terms).appendTo('#etsy-images');
+        $('<p></p>').text('Searching for ' + terms).appendTo('#etsy-images');
         return false;
     })
 })
@@ -30,8 +30,8 @@ Get the search terms from the bar and generate a url
 */
 function GenerateRequest() {
     terms = $('#etsy-terms').val();
-    etsyURL = "https://openapi.etsy.com/v2/listings/active.js?keywords="+
-        terms+"&limit=12&includes=Images:1&api_key="+api_key;
+    etsyURL = "https://openapi.etsy.com/v2/listings/active.js?keywords=" +
+        terms + "&limit=12&includes=Images:1&api_key=" + api_key;
     return SearchEtsy(etsyURL);
 }
 
@@ -41,11 +41,11 @@ Create a Request to etsy using jquery ajax
 datatype has to be jsonp due to issues with cross origin requests and brower nonsense
 all responses will be a 200 so data has to be validated
 */
-function SearchEtsy(etsyURL){
+function SearchEtsy(etsyURL) {
     $.ajax({
         url: etsyURL,
         dataType: 'jsonp',
-        success: function(data) {
+        success: function (data) {
             ValidateResponse(data)
         }
     })
@@ -60,16 +60,16 @@ function ValidateResponse(data) {
     if (data.ok) {
         $('#etsy-images').empty();
         if (data.count > 0) {
-           generateResults(data)
-            }
+            generateResults(data)
+        }
         else {
             $('#etsy-images').empty();
             alert(data.error);
-            }
-        } 
+        }
+    }
     else {
         $('<p>No results.</p>').appendTo('#etsy-images');
-        }
+    }
 };
 
 
@@ -78,7 +78,7 @@ function ValidateResponse(data) {
 object is iterated through and to create a list of elements...
 then it is passed to the render function...
 */
-function generateResults(result){
+function generateResults(result) {
     let items = result.results
     for (i = 0; i < items.length; i++) {
         largest_id++;
@@ -91,18 +91,19 @@ function generateResults(result){
                 <p>${current.description}</p>
             </div>`
         listings[current.listing_id] = {
-            category_id : current.category_id, 
-            category_path: current.category_path, 
-            has_variations: current.has_variations, 
+            category_id: current.category_id,
+            category_path: current.category_path,
+            has_variations: current.has_variations,
             is_customizable: current.is_customizable,
-            materials : current.materials, 
+            materials: current.materials,
             user_id: current.user_id,
             occasion: current.occasion,
             tags: current.tags,
             style: current.style,
-            color: current.Images[0].hex_code}
+            color: current.Images[0].hex_code
+        }
         renderResults(results_html[largest_id]);
-    
+
     }
 };
 
