@@ -1,6 +1,6 @@
 {
   "development": {
-    "username": "postgres",
+    "username": "antonytsygankov",
     "password": null,
     "database": "FullStackProject",
     "host": "127.0.0.1",

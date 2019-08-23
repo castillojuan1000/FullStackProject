@@ -1,7 +1,7 @@
 const api_key = 'API_KEY_HERE';
 
-
 //API pagination vars
+
 var COUNT_PER_PAGE; //results returned at once
 var total_count; // total results available
 let page_number; // current page number
