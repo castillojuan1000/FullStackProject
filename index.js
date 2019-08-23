@@ -33,18 +33,28 @@ app.set('views', './views');
 
 
 
-//Routes
+/* 
+  !GET ROUTES
+  TODO: Implement all of the GET routes
+*/
 app.get('/', (req, res, next) => {
-  res.send('Hello World');
+  res.redirect('/welcome');
+})
+app.get('/welcome', (req, res, next) => {
+  res.render('welcome')
+})
+
+app.get('/home', (req, res, next) => {
+  res.render('home');
 });
 
 
-app.get('/signup', (req, res) =>{
-  if(req.session.user_id !== undefined){ // check and see if the user has userID
+app.get('/signup', (req, res) => {
+  if (req.session.user_id !== undefined) { // check and see if the user has userID
     res.redirect("/survey"); // then send them to the survey page 
-    return; 
-}
-res.render('signup',{title: 'Sign up here'}) // this allows the request to be sent back to the user 
+    return;
+  }
+  res.render('signup', { title: 'Sign up here' }) // this allows the request to be sent back to the user 
 })
 
 app.post('/signup', (req, res, next) => {
