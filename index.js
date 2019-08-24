@@ -16,6 +16,7 @@ const app = express();
 var myStore = new SequelizeStore({
   db: db.sequelize
 });
+
 //set the store to myStore where we connect the DB details
 app.use(session({
   secret: 'mySecret',
@@ -81,6 +82,18 @@ app.get('/home', (req, res, next) => {
   res.render('home');
 })
 
+app.get('/userprofile', (req, res, next) => {
+  user_id = req.session.user_id;
+  db.users.findByPk(user_id).then((user) => {
+    const name = user.name;
+    const email = user.email;
+    res.render('userprofile', {
+      name: name,
+      email: email,
+    });
+  })
+
+})
 
 app.listen(process.env.PORT || 3000, function () {
   console.log('Server running on port 3000');
