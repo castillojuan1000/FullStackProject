@@ -1,16 +1,49 @@
-'use strict';
-module.exports = (sequelize, DataTypes) => {
-  const answers = sequelize.define('answers', {
-    question: DataTypes.STRING,
-    surveysid: DataTypes.INTEGER,
-    answer: DataTypes.STRING,
-    require: DataTypes.BOOLEAN
-  }, {});
-  answers.associate = function(models) {
-    // associations can be defined here
+/* jshint indent: 1 */
 
-    answers.belongsTo(models.surveys);
-    answers.belongsToMany(models.users, {through:'surveys'});
-  };
-  return answers;
+module.exports = function (sequelize, DataTypes) {
+  return sequelize.define('answers', {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+      field: 'id'
+    },
+    question: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      field: 'question'
+    },
+    surveysId: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'surveys',
+        key: 'id'
+      },
+      field: 'surveysId'
+    },
+    answer: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      field: 'answer'
+    },
+    require: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+      field: 'require'
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      field: 'createdAt'
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      field: 'updatedAt'
+    }
+  }, {
+      tableName: 'answers'
+    });
 };

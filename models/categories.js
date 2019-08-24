@@ -1,14 +1,39 @@
-'use strict';
-module.exports = (sequelize, DataTypes) => {
-  const categories = sequelize.define('categories', {
-    name: DataTypes.STRING,
-    surveysid: DataTypes.INTEGER
-  }, {});
-  categories.associate = function(models) {
-    // associations can be defined here
-    categories.belongsTo(models.surveys);
-  
-    
-  };
-  return categories;
+/* jshint indent: 1 */
+
+module.exports = function (sequelize, DataTypes) {
+  return sequelize.define('categories', {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+      field: 'id'
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      field: 'name'
+    },
+    surveysId: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'surveys',
+        key: 'id'
+      },
+      field: 'surveysId'
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      field: 'createdAt'
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      field: 'updatedAt'
+    }
+  }, {
+      tableName: 'categories'
+    });
 };
