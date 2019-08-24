@@ -113,7 +113,6 @@ then it is passed to the render function...
 function generateResults(result) {
     let items = result.results
     for (i = 0; i < items.length; i++) {
-
         largest_id++;
         let current = items[i]
         results_html[largest_id] = `

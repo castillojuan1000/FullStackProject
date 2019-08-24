@@ -44,11 +44,10 @@ app.get('/', (req, res, next) => {
 })
 
 app.get('/welcome', (req, res, next) => {
-  if (req.session.userId === null) {
-
-    res.render('welcome', { 'isAuthenticated': false })
+  if (req.session.userId !== undefined) {
+    res.render('welcome', { 'isAuthenticated': true })
   } else {
-    res.render('welcome', { isAuthenticated: true })
+    res.render('welcome', { 'isAuthenticated': false })
   }
 })
 
@@ -73,7 +72,7 @@ app.post('/signup', (req, res, next) => {
   var password = req.body.password;
   var name = req.body.name;
   bcrypt.hash(password, 10, (err, hash) => {// this allows the password to be private
-    db.users.create({ name: name, email: email, password_hash: hash }).then((user) => {
+    db.users.create({ name: name, email: email, passwordHash: hash }).then((user) => {
       req.session.userId = user.id;
       res.redirect('/')
     })
@@ -88,10 +87,12 @@ app.post('/login', (req, res, next) => {
       res.render('login', { error_message: "Please check your username & password" })
     } else {
       bcrypt.compare(password, user.passwordHash, function (err, matched) {
-        console.log(user)
         if (matched) {
           req.session.userId = user.id
-          res.redirect('welcome');
+          res.render('userprofile', {
+            name: user.name,
+            email: user.email
+          });
         } else {
           res.render("login", { error_message: "Please check your username & password" })
         }
@@ -101,9 +102,9 @@ app.post('/login', (req, res, next) => {
 })
 
 app.get('/signOut', (req, res, next) => {
-  req.session.destroy(() => {
-    res.redirect('/login')
-  })
+  console.log(req.session)
+  req.session.destroy()
+  res.redirect('/login')
 })
 
 app.get('/home', (req, res, next) => {

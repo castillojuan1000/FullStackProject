@@ -13,14 +13,13 @@ nav {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  top: 0px;
   border-radius: 5px;
   -webkit-box-shadow: 2px 2px grey;
           box-shadow: 2px 2px grey;
   padding: 0 5%;
   width: 90%;
-  margin: auto;
-  height: 10vh;
+  margin: 1px auto;
+  height: 12vh;
   background: #333;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
@@ -124,5 +123,18 @@ footer a {
 .welcomeContainer form input {
   border-radius: 5px;
   width: 200px;
+}
+
+.welcomeContainer .btn {
+  background-color: gold;
+}
+
+.welcomeContainer .btn:hover {
+  background-color: rgba(255, 215, 0, 0.8);
+  font-weight: 300;
+}
+
+.welcomeContainer .btn:active {
+  background-color: white;
 }
 /*# sourceMappingURL=style.css.map */

@@ -16,13 +16,12 @@ body{
 
 nav{
 display: flex;
-top: 0px;
 border-radius: 5px;
 box-shadow: 2px 2px grey;
 padding: 0 5%;
 width: 90%;
-margin: auto;
-height: 10vh;
+margin: 1px auto;
+height: 12vh;
 background: #333;
 justify-content: space-between;
 align-items: center;
@@ -91,5 +90,17 @@ footer{
             border-radius: 5px;
             width: 200px;
         }
+    }
+    .btn{
+        background-color: gold;
+    }
+    .btn:hover{
+        background-color: rgba(255, 215, 0, 0.8);
+        font-weight: 300;
+    }
+    .btn:active{
+        background-color: white;
+    }
+    .receiver{
     }
 }
