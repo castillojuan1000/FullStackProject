@@ -39,4 +39,5 @@ module.exports = function (sequelize, DataTypes) {
 	categories.associate = function (models) {
 		categories.belongsTo(models.surveys, { foreignKey: 'surveysId' })
 	}
+	return categories
 };
