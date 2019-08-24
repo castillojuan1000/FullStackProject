@@ -40,11 +40,10 @@ app.get('/', (req, res, next) => {
 
 
 app.get('/signup', (req, res) =>{
-  if(req.session.user_id !== undefined){ // check and see if the user has userID
-    res.redirect("/survey"); // then send them to the survey page 
-    return; 
-}
-res.render('signup',{title: 'Sign up here'}) // this allows the request to be sent back to the user 
+  res.render('signup');
+   if(req.session.user_id == undefined){ // check and see if the user has userID
+//     res.redirect("/survey"); // then send them to the survey page  
+ }
 })
 
 app.post('/signup', (req, res, next) => {
@@ -52,11 +51,17 @@ app.post('/signup', (req, res, next) => {
   var password = req.body.password;
   var name = req.body.name;
   bcrypt.hash(password, 10, (err, hash) => {// this allows the password to be private
-    db.user.create({ name: name, email: email, password_hash: hash }).then((user) => {
+    db.users.create({ name: name, email: email, password_hash: hash }).then((user) => {
       req.session.user_id = user.id;
-      res.redirect('/')
-    })
-  })
+      res.redirect('/survey')
+    });
+  });
+})
+
+app.get('/survey',(req,res) => {
+  if(req.session.user_id != undefined){
+    res.render('survey');
+  }
 })
 
 app.get('/signOut', (req, res, next) => {
@@ -71,6 +76,6 @@ app.get('/home', (req, res, next) => {
 
 
 app.listen(process.env.PORT || 3000, function () {
-  console.log('Server running on port 3000');
-});
+  console.log('Server running on port 3000')
+})
 
