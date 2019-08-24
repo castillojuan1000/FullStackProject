@@ -49,7 +49,10 @@ const resolvers = {
     },
     Surveys: {
         async user(user) {
-            return user.getUsers()
+            return user.getUser()
+        },
+        async answers(surveys) {
+            return surveys.getAnswers()
         }
     }
 }

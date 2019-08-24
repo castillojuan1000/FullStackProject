@@ -12,7 +12,7 @@ type User {
 type Surveys {
     id: Int!
     name: String!
-    questions: [Answers!]
+    answers: [Answers!]
     userId: Int!
     user: User!
 }

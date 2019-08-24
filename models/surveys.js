@@ -38,7 +38,7 @@ module.exports = function (sequelize, DataTypes) {
 		});
 	surveys.associate = function (models) {
 		surveys.belongsTo(models.users, { foreignKey: 'userId' })
-		surveys.hasMany(models.answers)
+		surveys.hasMany(models.answers, { foreignKey: 'surveysId' })
 	}
 	return surveys
 };
