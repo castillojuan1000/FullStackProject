@@ -1,7 +1,7 @@
 /* jshint indent: 1 */
 
-module.exports = function(sequelize, DataTypes) {
-	return sequelize.define('users', {
+module.exports = function (sequelize, DataTypes) {
+	const users = sequelize.define('users', {
 		id: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
@@ -35,6 +35,10 @@ module.exports = function(sequelize, DataTypes) {
 			field: 'updatedAt'
 		}
 	}, {
-		tableName: 'users'
-	});
+			tableName: 'users'
+		});
+	users.associate = function (models) {
+		users.hasMany(models.surveys)
+	};
+	return users
 };

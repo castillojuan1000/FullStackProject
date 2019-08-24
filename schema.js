@@ -5,7 +5,7 @@ type User {
     id: Int!
     name: String!
     email: String!
-    password_hash: String!
+    passwordHash: String!
     surveys: [Surveys!]
 }
 

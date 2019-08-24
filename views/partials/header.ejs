@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="styles/userprofile.css">
     <title>Gift to You</title>
 </head>
 
@@ -69,11 +70,13 @@
         </div>
 
         <div class="nav-links">
-            <a href="">Home</a>
+            <a href="/">Home</a>
             <% if(auth){ %>
-            <a href="">Login</a>
+            <a href="/signout">Sign Out</a>
+            <a href="/userprofile">Profile</a>
             <%}else{%>
-            <a href="">Sign up</a>
+            <a href="/signup">Sign up</a>
+            <a href="/login">Login</a>
             <% } %>
         </div>
     </nav>

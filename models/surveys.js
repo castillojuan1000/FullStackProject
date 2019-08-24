@@ -1,7 +1,7 @@
 /* jshint indent: 1 */
 
 module.exports = function (sequelize, DataTypes) {
-	return sequelize.define('surveys', {
+	const surveys = sequelize.define('surveys', {
 		id: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
@@ -36,4 +36,9 @@ module.exports = function (sequelize, DataTypes) {
 	}, {
 			tableName: 'surveys'
 		});
+	surveys.associate = function (models) {
+		surveys.belongsTo(models.users, { foreignKey: 'userId' })
+		surveys.hasMany(models.answers)
+	}
+	return surveys
 };

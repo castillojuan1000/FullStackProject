@@ -1,7 +1,7 @@
 /* jshint indent: 1 */
 
 module.exports = function (sequelize, DataTypes) {
-	return sequelize.define('answers', {
+	const answers = sequelize.define('answers', {
 		id: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
@@ -46,4 +46,8 @@ module.exports = function (sequelize, DataTypes) {
 	}, {
 			tableName: 'answers'
 		});
+	answers.associate = function (models) {
+		answers.belongsTo(models.surveys, { foreignKey: 'surveysId' })
+	}
+	return answers
 };

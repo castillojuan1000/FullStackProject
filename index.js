@@ -44,16 +44,24 @@ app.get('/', (req, res, next) => {
 })
 
 app.get('/welcome', (req, res, next) => {
-  res.render('welcome', { 'isAuthenticated': false })
+  if (req.session.userId === null) {
+
+    res.render('welcome', { 'isAuthenticated': false })
+  } else {
+    res.render('welcome', { isAuthenticated: true })
+  }
 })
 
 app.get('/home', (req, res, next) => {
   res.render('home');
 });
 
+app.get('/login', (req, res, next) => {
+  res.render('login', { error_message: '' })
+})
 
 app.get('/signup', (req, res) => {
-  if (req.session.user_id !== undefined) { // check and see if the user has userID
+  if (req.session.userId !== undefined) { // check and see if the user has userID
     res.redirect("/survey"); // then send them to the survey page 
     return;
   }
@@ -66,9 +74,29 @@ app.post('/signup', (req, res, next) => {
   var name = req.body.name;
   bcrypt.hash(password, 10, (err, hash) => {// this allows the password to be private
     db.users.create({ name: name, email: email, password_hash: hash }).then((user) => {
-      req.session.user_id = user.id;
+      req.session.userId = user.id;
       res.redirect('/')
     })
+  })
+})
+
+app.post('/login', (req, res, next) => {
+  const email = req.body.email;
+  const password = req.body.password
+  db.users.findOne({ where: { email: email } }).then(user => {
+    if (user === null) {
+      res.render('login', { error_message: "Please check your username & password" })
+    } else {
+      bcrypt.compare(password, user.passwordHash, function (err, matched) {
+        console.log(user)
+        if (matched) {
+          req.session.userId = user.id
+          res.redirect('welcome');
+        } else {
+          res.render("login", { error_message: "Please check your username & password" })
+        }
+      })
+    }
   })
 })
 
@@ -83,10 +111,12 @@ app.get('/home', (req, res, next) => {
 })
 
 app.get('/userprofile', (req, res, next) => {
-  user_id = req.session.user_id;
+  user_id = req.session.userId;
   db.users.findByPk(user_id).then((user) => {
     const name = user.name;
     const email = user.email;
+    console.log(name);
+
     res.render('userprofile', {
       name: name,
       email: email,
