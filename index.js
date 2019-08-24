@@ -40,8 +40,9 @@ app.set('views', './views');
 app.get('/', (req, res, next) => {
   res.redirect('/welcome');
 })
+
 app.get('/welcome', (req, res, next) => {
-  res.render('welcome')
+  res.render('welcome', { 'isAuthenticated': false })
 })
 
 app.get('/home', (req, res, next) => {
