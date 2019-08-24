@@ -41,7 +41,7 @@ app.get('/', (req, res, next) => {
 })
 
 app.get('/welcome', (req, res, next) => {
-  res.render('welcome')
+  res.render('welcome', { 'isAuthenticated': false })
 })
 
 app.get('/home', (req, res, next) => {

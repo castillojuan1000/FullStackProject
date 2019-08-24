@@ -1,1 +1,16 @@
-<% include('/partials/header.ejs') %>
+<%- include('partials/header.ejs', {auth: isAuthenticated}) %>
+
+
+<div class="welcomeContainer">
+    <div>
+        <h1>Need gift ideas?</h1>
+        <div>
+            <a class="btn">Start</a>
+        </div>
+    </div>
+</div>
+
+
+
+
+<%- include('partials/footer.ejs', {auth: isAuthenticated}) %>
