@@ -11,21 +11,34 @@ const resolvers = {
         },
         async getSurveys(root, { id }, { models }) {
             return models.surveys.findByPk(id)
+        },
+        async getUserSurveys(root, { userId }, { models }) {
+            return models.surveys.findAll({
+                where: {
+                    userId: userId
+                }
+            })
+        },
+        async getSurveyAnswers(root, { survey_id }, { models }) {
+            return models.answers.findAll({
+                where: {
+                    surveysId: id
+                }
+            })
         }
     },
     Mutation: {
         async createUser(root, { name, email, password }, { models }) {
             var encryptedPass = await hashPass(password)
-            console.log(encryptedPass)
-            const user = { name: name, email: email, password_hash: encryptedPass }
+            const user = { name: name, email: email, passwordHash: encryptedPass }
             return models.users.create(user)
         },
         async createSurvey(root, { user_id, name }) {
-            const survey = { user_id: user_id, name: name }
+            const survey = { userId: user_id, name: name }
             return models.surveys.create(survey)
         },
-        async createAnswer(root, { survey_id, name, question, answer }) {
-            const answerObject = { name: name, survey_id: survey_id, question: question, answer: answer }
+        async createAnswer(root, { surveys_id, required, question, answer }) {
+            const answerObject = { require: required, surveysId: surveys_id, question: question, answer: answer }
             return models.answers.create(answerObject)
         }
     },

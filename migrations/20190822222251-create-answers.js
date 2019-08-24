@@ -11,7 +11,7 @@ module.exports = {
       question: {
         type: Sequelize.STRING
       },
-      surveys_id: {
+      surveysId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {

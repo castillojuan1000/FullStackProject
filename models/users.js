@@ -1,7 +1,7 @@
 /* jshint indent: 1 */
 
-module.exports = function (sequelize, DataTypes) {
-	return sequelize.define('categories', {
+module.exports = function(sequelize, DataTypes) {
+	return sequelize.define('users', {
 		id: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
@@ -11,17 +11,18 @@ module.exports = function (sequelize, DataTypes) {
 		},
 		name: {
 			type: DataTypes.STRING,
-			allowNull: true,
+			allowNull: false,
 			field: 'name'
 		},
-		surveysId: {
-			type: DataTypes.INTEGER,
-			allowNull: true,
-			references: {
-				model: 'surveys',
-				key: 'id'
-			},
-			field: 'surveysId'
+		email: {
+			type: DataTypes.STRING,
+			allowNull: false,
+			field: 'email'
+		},
+		passwordHash: {
+			type: DataTypes.STRING,
+			allowNull: false,
+			field: 'password_hash'
 		},
 		createdAt: {
 			type: DataTypes.DATE,
@@ -34,6 +35,6 @@ module.exports = function (sequelize, DataTypes) {
 			field: 'updatedAt'
 		}
 	}, {
-			tableName: 'categories'
-		});
+		tableName: 'users'
+	});
 };

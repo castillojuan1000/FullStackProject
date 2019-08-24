@@ -33,8 +33,6 @@ apolloServ.applyMiddleware({ app })
 
 
 
-
-
 myStore.sync({
     force: true
 })
@@ -94,8 +92,17 @@ app.get('/home', (req, res, next) => {
     res.render('home');
 })
 
+survey = db.surveys.findAll({
+    where: {
+        "userId": 1
+    }
+}).then(res => {
+    console.log(res)
+})
+
 
 app.listen(process.env.PORT || 3000, function () {
     console.log('Server running on port 3000');
     console.log(apolloServ.graphqlPath)
 });
+

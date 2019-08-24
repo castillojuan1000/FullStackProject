@@ -1,7 +1,7 @@
 /* jshint indent: 1 */
 
 module.exports = function (sequelize, DataTypes) {
-	return sequelize.define('categories', {
+	return sequelize.define('surveys', {
 		id: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
@@ -14,14 +14,14 @@ module.exports = function (sequelize, DataTypes) {
 			allowNull: true,
 			field: 'name'
 		},
-		surveysId: {
+		userId: {
 			type: DataTypes.INTEGER,
 			allowNull: true,
 			references: {
-				model: 'surveys',
+				model: 'users',
 				key: 'id'
 			},
-			field: 'surveysId'
+			field: 'userId'
 		},
 		createdAt: {
 			type: DataTypes.DATE,
@@ -34,6 +34,6 @@ module.exports = function (sequelize, DataTypes) {
 			field: 'updatedAt'
 		}
 	}, {
-			tableName: 'categories'
+			tableName: 'surveys'
 		});
 };

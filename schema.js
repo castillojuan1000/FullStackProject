@@ -12,27 +12,29 @@ type User {
 type Surveys {
     id: Int!
     name: String!
-    answers: [Answers!]
-    user_id: Int!
+    questions: [Answers!]
+    userId: Int!
     user: User!
 }
 type Answers {
     id: Int!
     question: String!
     answer: String!
-    surveys_Id: Surveys!
-    require: Boolean!
+    surveysId: Surveys!
+    required: Boolean!
 }
 
 type Query{
     getUser(id: Int!): User!
     getAllUsers: [User!]!
     getSurveys(id: Int!): Surveys!
+    getUserSurveys(userId: Int!): [Surveys!]!
+    getSurveyAnswers(surveyId: Int!): [Answers!]!
 }
 type Mutation {
     createUser(name: String! email: String! password: String!): User!
     createSurvey(name: String! user_id: Int!): Surveys!
-    createAnswer(name: String! surveys_Id: Int! answer: String! require: Boolean! question: String!): Answers!
+    createAnswer(surveys_id: Int! answer: String! required: Boolean! question: String!): Answers!
 }
 
 `
