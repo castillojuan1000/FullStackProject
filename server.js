@@ -9,14 +9,21 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const app = express();
 
+var jsonParser = bodyParser.json()
+// replace
+var FAKEVARIABLE = {
+    session : {
+      loading : {}
+    }
+  }
+
+
 app.use(bodyParser.urlencoded({ extended: false }))
 
 //Middleware set up EJS & static
 app.use(express.static(path.join(__dirname, 'public')))
 app.set('view engine', 'ejs');
 app.set('views', './views');
-
-
 
 //Routes
 app.get('/', (req, res, next) => {
@@ -27,10 +34,32 @@ app.get('/hello', (req, res, next) => {
   res.render('home', {})
 });
 
+app.get('/loading/:id', (req, res, next) => {
+  let id = req.params.id;
+  FAKEVARIABLE.session.loading.id = true
+  res.render('loading', {id : id});
+});
+
 app.get('/listing/:id', (req, res, next) => {
-    let id = req.body.id;
-    console.log(id);
-    res.render('listing', {});
+    console.log("this works too")
+    let id = req.params.id;
+    console.log(FAKEVARIABLE.session.id);
+    res.render('listing', {info : FAKEVARIABLE.session.id});
+});
+
+app.get('/check/:id', (req, res, next) => {
+  let id = req.params.id;
+  if (id in FAKEVARIABLE.session) {
+    res.json({success : true, status : 200});
+  } else {
+    res.json({success : false, status : 401});
+  }
+});
+
+app.post('/listing/:id', jsonParser, (req, res, next) => {
+  let id = req.params.id;
+  FAKEVARIABLE.session.id = req.body;
+  res.json({success : "Updated Successfully", status : 200});
 });
 
 
