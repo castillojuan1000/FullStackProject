@@ -1,5 +1,7 @@
 //Insert modules needed for the router
 const express = require('express');
+const { ApolloServer, gql } = require('apollo-server-express');
+const { makeExecutableSchema } = require('graphql-tools');
 const fs = require('fs')
 const path = require('path')
 const ejs = require('ejs');
@@ -83,5 +85,12 @@ app.get('/home', (req, res, next) => {
 app.listen(process.env.PORT || 3000, function () {
   console.log('Server running on port 3000');
 });
+
+//! Apollo set up
+const typeDefs = require('./schema');
+const resolvers = require('./resolvers');
+models = db
+const apolloServ = new ApolloServer({ typeDefs, resolvers, context: { models } })
+apolloServ.applyMiddleware({ app })
 
 module.exports = db;
