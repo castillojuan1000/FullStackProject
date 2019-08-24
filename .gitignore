@@ -2,3 +2,5 @@ node_modules/
 .vscode
 keys.js
 .DS_STORE
+
+.env

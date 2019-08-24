@@ -24,8 +24,13 @@ app.get('/', (req, res, next) => {
 });
 
 app.get('/hello', (req, res, next) => {
-    res.render('home', {})
-  res.send('Hello World');
+  res.render('home', {})
+});
+
+app.get('/listing/:id', (req, res, next) => {
+    let id = req.body.id;
+    console.log(id);
+    res.render('listing', {});
 });
 
 
@@ -41,5 +46,9 @@ app.post('/signup', (req, res, next) => {
   })
 })
 
-app.listen(3003);
+const port = 3003;
+
+app.listen(port, () =>{
+  console.log(`Server On ${port}`);
+});
 

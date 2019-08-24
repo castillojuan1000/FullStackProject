@@ -87,10 +87,11 @@ function generateResults(result){
         let current = items[i]
         results_html[largest_id] = `
             <div class="item-container" id="${current.listing_id}">
+                <a href="${current.url}">
                 <img src="${current.Images[0].url_170x135}"></img>
-                <h1><a href="${current.url}">${current.title}</a></h1>
-                <h3>${current.price}</h3><span>${current.quantity}</span>
-                <p>${current.description}</p>
+                <h1>${current.title}</h1>
+                <h3>${current.price}</h3>
+                </a>
             </div>`
         listings[current.listing_id] = {
             category_id : current.category_id, 
