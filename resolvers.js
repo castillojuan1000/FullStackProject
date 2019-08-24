@@ -19,10 +19,10 @@ const resolvers = {
                 }
             })
         },
-        async getSurveyAnswers(root, { survey_id }, { models }) {
+        async getSurveyAnswers(root, { surveyId }, { models }) {
             return models.answers.findAll({
                 where: {
-                    surveysId: id
+                    surveysId: surveyId
                 }
             })
         }
