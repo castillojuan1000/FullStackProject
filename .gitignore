@@ -1,9 +1,5 @@
 node_modules/
-.env
-<<<<<<< HEAD
-
-=======
->>>>>>> master
+.vscode
 keys.js
 .DS_STORE
 .env
