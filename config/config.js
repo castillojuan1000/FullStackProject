@@ -5,10 +5,7 @@ module.exports = {
     "database": "fullstackproject",
     "host": process.env.DBURL,
     "dialect": "postgres",
-<<<<<<< HEAD
     "operatorsAliases": false,
-=======
->>>>>>> alexanderBranch
     "logging": false
   }
 }
