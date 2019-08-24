@@ -23,10 +23,21 @@ app.use(session({
     store: myStore
 }));
 
+//! Apollo set up
+const typeDefs = require('./schema');
+const resolvers = require('./resolvers');
+models = db
+const apolloServ = new ApolloServer({ typeDefs, resolvers, context: { models } })
+apolloServ.applyMiddleware({ app })
 
-const schema =
 
-    myStore.sync();
+
+
+
+
+myStore.sync({
+    force: true
+})
 
 app.use(bodyParser.urlencoded({ extended: false }))
 
@@ -86,12 +97,5 @@ app.get('/home', (req, res, next) => {
 
 app.listen(process.env.PORT || 3000, function () {
     console.log('Server running on port 3000');
+    console.log(apolloServ.graphqlPath)
 });
-
-db.users.findAll().then(res => { console.log(res) })
-
-
-
-
-
-

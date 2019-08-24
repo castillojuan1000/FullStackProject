@@ -2,15 +2,13 @@
 module.exports = (sequelize, DataTypes) => {
   const answers = sequelize.define('answers', {
     question: DataTypes.STRING,
-    surveysid: DataTypes.INTEGER,
+    surveys_id: DataTypes.INTEGER,
     answer: DataTypes.STRING,
     require: DataTypes.BOOLEAN
   }, {});
-  answers.associate = function(models) {
+  answers.associate = function (models) {
     // associations can be defined here
-
-    answers.belongsTo(models.surveys);
-    answers.belongsToMany(models.users, {through:'surveys'});
+    answers.hasMany(models.surveys, { as: 'questions' });
   };
   return answers;
 };
