@@ -21,7 +21,7 @@ box-shadow: 2px 2px grey;
 padding: 0 5%;
 width: 90%;
 margin: 1px auto;
-height: 12vh;
+height: 15vh;
 background: #333;
 justify-content: space-between;
 align-items: center;
@@ -76,11 +76,7 @@ footer{
         letter-spacing: 2px;
     }
     a{
-        background-color: gold;
-        margin: 10px;
-        font-size: 25px;
-        letter-spacing: 5px;
-        width: 50%;
+
     }
     form{
         display: flex;
@@ -93,6 +89,10 @@ footer{
     }
     .btn{
         background-color: gold;
+        margin: 10px;
+        font-size: 18px;
+        letter-spacing: 2px;
+        width: 50%;
     }
     .btn:hover{
         background-color: rgba(255, 215, 0, 0.8);
@@ -100,7 +100,5 @@ footer{
     }
     .btn:active{
         background-color: white;
-    }
-    .receiver{
     }
 }

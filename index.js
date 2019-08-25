@@ -8,6 +8,8 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const db = require('./models');
+const crypto = require('crypto');
+const nodemailer = require('nodemailer')
 const app = express();
 
 //Connect sequelize session to our sequelize db
@@ -62,11 +64,93 @@ app.get('/signup', (req, res) => {
     res.redirect("/survey"); // then send them to the survey page 
     return;
   }
-  res.render('signup', { title: 'Sign up here' }) // this allows the request to be sent back to the user 
+  res.render('signup', { error: '' }) // this allows the request to be sent back to the user 
+})
+
+
+app.get('/signOut', (req, res, next) => {
+  req.session.destroy()
+  res.redirect('/login')
+})
+
+app.get('/userprofile', (req, res, next) => {
+  user_id = req.session.userId;
+  db.users.findByPk(user_id).then((user) => {
+    const name = user.name;
+    const email = user.email;
+    console.log(name);
+
+    res.render('userprofile', {
+      name: name,
+      email: email,
+    });
+  })
+
+})
+
+app.get('/reset', (req, res) => {
+  db.users.findOne({
+    where: {
+      resetPasswordToken: req.query.token,
+    }
+  }).then(user => {
+    if (user == null) {
+      res.json('Password reset link is invalid or has expired')
+    } else {
+      req.session.userId = user.id
+      res.render('reset', { email: user.email })
+    }
+  })
+})
+
+app.get('/forgotPassword', (req, res) => {
+  res.render('forgotPass', { message: '' })
 })
 
 
 //! POST ROUTES
+app.post('/forgotPassword', (req, res) => {
+  if (req.body.email === '') {
+    res.render('forgotPass', { message: 'Please enter an email.' })
+  } else {
+    db.users.findOne({ where: { email: req.body.email } }).then(async (user) => {
+      if (user === null) {
+        res.render('forgotPass', { message: "I couldn't find that email in my records" })
+      } else {
+        const token = crypto.randomBytes(20).toString('hex');
+        user.update({
+          resetPasswordToken: token,
+          resetPasswordTokenExpires: Date.now() + 36000
+        })
+        const transporter = nodemailer.createTransport({
+          host: 'smtp.sendgrid.net',
+          port: 587,
+          auth: {
+            user: 'apikey',
+            pass: process.env.SENDGRIDAPIKEY
+          }
+        });
+        const mailOptions = {
+          from: 'noreply@giftToYou.ga',
+          to: req.body.email,
+          subject: 'GiftToYou password reset',
+          html: `<p>You are receiving this because your (or someone else) has requested the pasword for your account
+          to be reset. Please click the following link to complete the proccess and reset your password.<br> <a href="http://localhost:3000/reset/?token=${token}">Click here</a><br><br>
+          If you did not request this, please ignore this email and your password will not be changed.</p>`
+        }
+        await transporter.sendMail(mailOptions, function (err, res) {
+          if (err) {
+            console.error('there was an error: ', err)
+          } else {
+            console.log('Sent Email')
+          }
+        })
+      }
+    }).then(() => {
+      res.render('forgotPass', { message: 'Recovery email sent.' })
+    })
+  }
+})
 app.post('/signup', (req, res, next) => {
   var email = req.body.email;
   var password = req.body.password;
@@ -75,6 +159,8 @@ app.post('/signup', (req, res, next) => {
     db.users.create({ name: name, email: email, passwordHash: hash }).then((user) => {
       req.session.userId = user.id;
       res.redirect('/')
+    }).catch(err => {
+      res.render('signup', { error: 'This email already exist' })
     })
   })
 })
@@ -100,26 +186,29 @@ app.post('/login', (req, res, next) => {
     }
   })
 })
-
-app.get('/signOut', (req, res, next) => {
-  req.session.destroy()
-  res.redirect('/login')
-})
-
-app.get('/userprofile', (req, res, next) => {
-  user_id = req.session.userId;
-  db.users.findByPk(user_id).then((user) => {
-    const name = user.name;
-    const email = user.email;
-    console.log(name);
-
-    res.render('userprofile', {
-      name: name,
-      email: email,
-    });
+app.post('/updatePassword', (req, res) => {
+  console.log(req.body.email)
+  db.users.findOne({
+    where: {
+      id: req.session.userId,
+    }
+  }).then(user => {
+    if (user != null) {
+      bcrypt.hash(req.body.password, 10, function (err, hash) {
+        user.update({
+          passwordHash: hash,
+          resetPasswordToken: null,
+          resetPasswordTokenExpires: null
+        })
+      })
+      return user
+    }
+  }).then(user => {
+    req.session.userId = user.id
+    res.render('welcome', { isAuthenticated: true })
   })
-
 })
+
 
 app.listen(process.env.PORT || 3000, function () {
   console.log('Server running on port 3000');

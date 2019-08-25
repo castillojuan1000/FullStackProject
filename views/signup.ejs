@@ -4,12 +4,15 @@
   <div class="welcomeContainer">
     <!-- sign up section  -->
     <form action="/signup" method="POST">
+      <% if(error){ %>
+      <h3 style="color: red"><%= error %></h3>
+      <a href="/forgotPassword">Forgot Password</a>
+      <% } %>
       <label for="name">Name</label>
       <input type="text" name="name" />
       <br />
       <br />
       <% include partials/login_fields.ejs %>
-
       <button class="btn" type="submit">Sign Up</button>
     </form>
   </div>

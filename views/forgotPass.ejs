@@ -1,0 +1,12 @@
+<%- include('partials/header.ejs', {auth: false}) %>
+
+<div class="welcomeContainer">
+    <form action="/forgotPassword" method="post">
+        <h3><%= message %></h3>
+        <label for="email">Please enter your email</label>
+        <input type="email" name="email" id="email">
+        <button type="submit" class="btn">Reset</button>
+    </form>
+</div>
+
+<%- include('partials/header.ejs', {auth: false}) %>

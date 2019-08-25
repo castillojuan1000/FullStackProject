@@ -17,12 +17,24 @@ module.exports = function (sequelize, DataTypes) {
 		email: {
 			type: DataTypes.STRING,
 			allowNull: false,
-			field: 'email'
+			field: 'email',
+			unique: true,
+			validate: {
+				isEmail: true
+			}
 		},
 		passwordHash: {
 			type: DataTypes.STRING,
 			allowNull: false,
 			field: 'password_hash'
+		},
+		resetPasswordToken: {
+			type: DataTypes.STRING,
+			field: 'resetPasswordToken'
+		},
+		resetPasswordExpires: {
+			type: DataTypes.DATE,
+			field: 'resetPasswordExpires'
 		},
 		createdAt: {
 			type: DataTypes.DATE,

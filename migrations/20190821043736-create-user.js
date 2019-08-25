@@ -14,7 +14,17 @@ module.exports = {
       },
       email: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique: true,
+        validate: {
+          isEmail: true
+        }
+      },
+      resetPasswordToken: {
+        type: Sequelize.STRING,
+      },
+      resetPasswordExpires: {
+        type: Sequelize.DATE,
       },
       password_hash: {
         allowNull: false,

@@ -19,7 +19,7 @@ nav {
   padding: 0 5%;
   width: 90%;
   margin: 1px auto;
-  height: 12vh;
+  height: 15vh;
   background: #333;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
@@ -99,14 +99,6 @@ footer a {
   letter-spacing: 2px;
 }
 
-.welcomeContainer a {
-  background-color: gold;
-  margin: 10px;
-  font-size: 25px;
-  letter-spacing: 5px;
-  width: 50%;
-}
-
 .welcomeContainer form {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -127,6 +119,10 @@ footer a {
 
 .welcomeContainer .btn {
   background-color: gold;
+  margin: 10px;
+  font-size: 18px;
+  letter-spacing: 2px;
+  width: 50%;
 }
 
 .welcomeContainer .btn:hover {
