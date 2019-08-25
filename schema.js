@@ -45,7 +45,8 @@ type Mutation {
     createSurvey(name: String! user_id: Int!): Surveys!
     createAnswer(surveyId: Int! answer: String! required: Boolean! question: String!): Answers!
     createCategory(surveyId: Int! name: String!): Categories!
-    removeSurvey(surveyId: Int!): User!
+    removeSurvey(surveyId: Int!): String!
+    removeUser(id: Int!): String!
 }
 
 `

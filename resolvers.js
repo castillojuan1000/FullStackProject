@@ -55,7 +55,14 @@ const resolvers = {
             await models.categories.destroy({ where: { surveysId: surveyId } })
             await models.answers.destroy({ where: { surveysId: surveyId } })
             return models.surveys.destroy({ where: { id: surveyId } })
-
+        },
+        async removeUser(root, { id }) {
+            const userSurveys = await models.surveys.findOne({ where: { userId: id } })
+            await models.answers.destroy({ where: { surveysId: userSurveys.id } })
+            await models.categories.destroy({ where: { surveysId: userSurveys.id } })
+            await models.surveys.destroy({ where: { userId: id } })
+            await models.users.destroy({ where: { id: id } })
+            return `Deleted user with id of ${id}`
         }
     },
     User: {
