@@ -9,7 +9,7 @@ const resolvers = {
         async getAllUsers(root, args, { models }) {
             return models.users.findAll()
         },
-        async getSurveys(root, { id }, { models }) {
+        async getSurvey(root, { id }, { models }) {
             return models.surveys.findByPk(id)
         },
         async getUserSurveys(root, { userId }, { models }) {
@@ -44,12 +44,18 @@ const resolvers = {
             const survey = { userId: user_id, name: name }
             return models.surveys.create(survey)
         },
-        async createAnswer(root, { surveys_id, required, question, answer }) {
-            const answerObject = { require: required, surveysId: surveys_id, question: question, answer: answer }
+        async createAnswer(root, { surveyId, required, question, answer }) {
+            const answerObject = { require: required, surveysId: surveyId, question: question, answer: answer }
             return models.answers.create(answerObject)
         },
         async createCategory(root, { surveyId, name }) {
             return models.categories.create({ surveysId: surveyId, name: name })
+        },
+        async removeSurvey(root, { surveyId }) {
+            await models.categories.destroy({ where: { surveysId: surveyId } })
+            await models.answers.destroy({ where: { surveysId: surveyId } })
+            return models.surveys.destroy({ where: { id: surveyId } })
+
         }
     },
     User: {
@@ -66,6 +72,16 @@ const resolvers = {
         },
         async categories(surveys) {
             return surveys.getCategories()
+        }
+    },
+    Answers: {
+        async survey(answers) {
+            return answers.getSurvey()
+        }
+    },
+    Categories: {
+        async survey(categories) {
+            return categories.getSurvey()
         }
     }
 }

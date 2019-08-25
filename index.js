@@ -136,5 +136,3 @@ const resolvers = require('./resolvers');
 models = db
 const apolloServ = new ApolloServer({ typeDefs, resolvers, context: { models } })
 apolloServ.applyMiddleware({ app })
-
-module.exports = db;

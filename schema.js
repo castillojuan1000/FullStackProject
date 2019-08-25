@@ -2,7 +2,7 @@ const { gql } = require('apollo-server-express')
 const typeDefs = gql`
 
 type User {
-    id: Int!
+    id: ID!
     name: String!
     email: String!
     passwordHash: String!
@@ -10,31 +10,32 @@ type User {
 }
 
 type Surveys {
-    id: Int!
+    id: ID!
     name: String!
     answers: [Answers!]
     userId: Int!
     user: User!
     categories: [Categories!]
-    createdAt: Int!
+    createdAt: String!
 }
 type Answers {
-    id: Int!
+    id: ID!
     question: String!
     answer: String!
-    surveysId: Surveys!
+    survey: Surveys!
     required: Boolean!
 }
+
 type Categories {
-    id: Int!
+    id: ID!
     name: String!
-    surveysId: Surveys!
+    survey: Surveys!
 }
 
 type Query{
     getUser(id: Int!): User!
     getAllUsers: [User!]!
-    getSurveys(id: Int!): Surveys!
+    getSurvey(id: Int!): Surveys!
     getUserSurveys(userId: Int!): [Surveys!]!
     getSurveyAnswers(surveyId: Int!): [Answers!]!
     getSurveyCategories(surveyId: Int!): [Categories]!
@@ -42,8 +43,9 @@ type Query{
 type Mutation {
     createUser(name: String! email: String! password: String!): User!
     createSurvey(name: String! user_id: Int!): Surveys!
-    createAnswer(surveysId: Int! answer: String! required: Boolean! question: String!): Answers!
-    createCategory(surveysId: Int! name: String!): Categories!
+    createAnswer(surveyId: Int! answer: String! required: Boolean! question: String!): Answers!
+    createCategory(surveyId: Int! name: String!): Categories!
+    removeSurvey(surveyId: Int!): User!
 }
 
 `
