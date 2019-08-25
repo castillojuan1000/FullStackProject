@@ -25,6 +25,13 @@ const resolvers = {
                     surveysId: surveyId
                 }
             })
+        },
+        async getSurveyCategories(root, { surveyId }, { models }) {
+            return models.categories.findAll({
+                where: {
+                    surveysId: surveyId
+                }
+            })
         }
     },
     Mutation: {
@@ -40,6 +47,9 @@ const resolvers = {
         async createAnswer(root, { surveys_id, required, question, answer }) {
             const answerObject = { require: required, surveysId: surveys_id, question: question, answer: answer }
             return models.answers.create(answerObject)
+        },
+        async createCategory(root, { surveyId, name }) {
+            return models.categories.create({ surveysId: surveyId, name: name })
         }
     },
     User: {
@@ -53,6 +63,9 @@ const resolvers = {
         },
         async answers(surveys) {
             return surveys.getAnswers()
+        },
+        async categories(surveys) {
+            return surveys.getCategories()
         }
     }
 }

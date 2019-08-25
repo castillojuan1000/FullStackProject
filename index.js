@@ -1,7 +1,5 @@
 //Insert modules needed for the router
 const express = require('express');
-const { ApolloServer, gql } = require('apollo-server-express');
-const { makeExecutableSchema } = require('graphql-tools');
 const fs = require('fs')
 const path = require('path')
 const ejs = require('ejs');
@@ -67,6 +65,8 @@ app.get('/signup', (req, res) => {
   res.render('signup', { title: 'Sign up here' }) // this allows the request to be sent back to the user 
 })
 
+
+//! POST ROUTES
 app.post('/signup', (req, res, next) => {
   var email = req.body.email;
   var password = req.body.password;
@@ -102,13 +102,8 @@ app.post('/login', (req, res, next) => {
 })
 
 app.get('/signOut', (req, res, next) => {
-  console.log(req.session)
   req.session.destroy()
   res.redirect('/login')
-})
-
-app.get('/home', (req, res, next) => {
-  res.render('home');
 })
 
 app.get('/userprofile', (req, res, next) => {
@@ -130,7 +125,12 @@ app.listen(process.env.PORT || 3000, function () {
   console.log('Server running on port 3000');
 });
 
+
+
+
 //! Apollo set up
+const { ApolloServer, gql } = require('apollo-server-express');
+const { makeExecutableSchema } = require('graphql-tools');
 const typeDefs = require('./schema');
 const resolvers = require('./resolvers');
 models = db

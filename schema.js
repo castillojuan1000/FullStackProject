@@ -15,6 +15,8 @@ type Surveys {
     answers: [Answers!]
     userId: Int!
     user: User!
+    categories: [Categories!]
+    createdAt: Int!
 }
 type Answers {
     id: Int!
@@ -23,6 +25,11 @@ type Answers {
     surveysId: Surveys!
     required: Boolean!
 }
+type Categories {
+    id: Int!
+    name: String!
+    surveysId: Surveys!
+}
 
 type Query{
     getUser(id: Int!): User!
@@ -30,11 +37,13 @@ type Query{
     getSurveys(id: Int!): Surveys!
     getUserSurveys(userId: Int!): [Surveys!]!
     getSurveyAnswers(surveyId: Int!): [Answers!]!
+    getSurveyCategories(surveyId: Int!): [Categories]!
 }
 type Mutation {
     createUser(name: String! email: String! password: String!): User!
     createSurvey(name: String! user_id: Int!): Surveys!
-    createAnswer(surveys_id: Int! answer: String! required: Boolean! question: String!): Answers!
+    createAnswer(surveysId: Int! answer: String! required: Boolean! question: String!): Answers!
+    createCategory(surveysId: Int! name: String!): Categories!
 }
 
 `
