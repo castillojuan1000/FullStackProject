@@ -1,12 +1,40 @@
-'use strict';
-module.exports = (sequelize, DataTypes) => {
-  const user = sequelize.define('users', {
-    name: DataTypes.STRING,
-    email: DataTypes.STRING,
-    password_hash: DataTypes.STRING
-  }, {});
-  user.associate = function (models) {
-    user.hasMany(models.surveys); //? is this the right association? 
-  };
-  return user;
+/* jshint indent: 1 */
+
+module.exports = function (sequelize, DataTypes) {
+  return sequelize.define('users', {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+      field: 'id'
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      field: 'name'
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      field: 'email'
+    },
+    passwordHash: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      field: 'password_hash'
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      field: 'createdAt'
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      field: 'updatedAt'
+    }
+  }, {
+      tableName: 'users'
+    });
 };
