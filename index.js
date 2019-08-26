@@ -119,8 +119,7 @@ app.post('/forgotPassword', (req, res) => {
       } else {
         const token = crypto.randomBytes(20).toString('hex');
         user.update({
-          resetPasswordToken: token,
-          resetPasswordTokenExpires: Date.now() + 36000
+          resetPasswordToken: token
         })
         const transporter = nodemailer.createTransport({
           host: 'smtp.sendgrid.net',
@@ -197,8 +196,7 @@ app.post('/updatePassword', (req, res) => {
       bcrypt.hash(req.body.password, 10, function (err, hash) {
         user.update({
           passwordHash: hash,
-          resetPasswordToken: null,
-          resetPasswordTokenExpires: null
+          resetPasswordToken: null
         })
       })
       return user

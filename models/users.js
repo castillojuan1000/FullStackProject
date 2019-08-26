@@ -32,10 +32,6 @@ module.exports = function (sequelize, DataTypes) {
 			type: DataTypes.STRING,
 			field: 'resetPasswordToken'
 		},
-		resetPasswordExpires: {
-			type: DataTypes.DATE,
-			field: 'resetPasswordExpires'
-		},
 		createdAt: {
 			type: DataTypes.DATE,
 			allowNull: false,
