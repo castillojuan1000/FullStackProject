@@ -20,7 +20,7 @@ module.exports = {
           isEmail: true
         }
       },
-      resetPasswordToken: {
+      reset_password_token: {
         type: Sequelize.STRING,
       },
       password_hash: {

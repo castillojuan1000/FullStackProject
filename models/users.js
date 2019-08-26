@@ -28,9 +28,9 @@ module.exports = function (sequelize, DataTypes) {
 			allowNull: false,
 			field: 'password_hash'
 		},
-		resetPasswordToken: {
+		reset_password_token: {
 			type: DataTypes.STRING,
-			field: 'resetPasswordToken'
+			field: 'reset_password_token'
 		},
 		createdAt: {
 			type: DataTypes.DATE,
