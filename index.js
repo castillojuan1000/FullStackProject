@@ -78,7 +78,6 @@ app.get('/userprofile', (req, res, next) => {
   db.users.findByPk(user_id).then((user) => {
     const name = user.name;
     const email = user.email;
-    console.log(name);
 
     res.render('userprofile', {
       name: name,
@@ -186,7 +185,6 @@ app.post('/login', (req, res, next) => {
   })
 })
 app.post('/updatePassword', (req, res) => {
-  console.log(req.body.email)
   db.users.findOne({
     where: {
       id: req.session.userId,
