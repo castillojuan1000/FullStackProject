@@ -35,15 +35,10 @@ app.set('view engine', 'ejs');
 app.set('views', './views');
 
 
-<<<<<<< HEAD
 /* 
   !GET ROUTES
   TODO: Implement all of the GET routes
 */
-=======
-
-//! *********Routes ********************
->>>>>>> master
 app.get('/', (req, res, next) => {
   res.redirect('/welcome');
 })
@@ -60,14 +55,10 @@ app.get('/home', (req, res, next) => {
   res.render('home');
 });
 
-<<<<<<< HEAD
 app.get('/login', (req, res, next) => {
   res.render('login', { error_message: '' })
 })
 
-=======
-//******* signup Routes ********************
->>>>>>> master
 app.get('/signup', (req, res) => {
   if (req.session.userId !== undefined) { // check and see if the user has userID
     res.redirect("/survey"); // then send them to the survey page 
@@ -209,7 +200,7 @@ app.post('/updatePassword', (req, res) => {
       id: req.session.userId,
     }
   }).then(user => {
-    if (user != null) {
+    if (user.name != undefined) {
       bcrypt.hash(req.body.password, 10, function (err, hash) {
         user.update({
           passwordHash: hash,
