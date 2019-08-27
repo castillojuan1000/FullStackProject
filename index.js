@@ -34,12 +34,12 @@ app.set('views', './views');
 
 
 
-//Routes
+//! *********Routes ********************
 app.get('/', (req, res, next) => {
   res.send('Hello World');
 });
 
-
+//******* signup Routes ********************
 app.get('/signup', (req, res) => {
   if (req.session.user_id !== undefined) { // check and see if the user has userID
     res.redirect("/survey"); // then send them to the survey page 
@@ -60,17 +60,29 @@ app.post('/signup', (req, res, next) => {
   })
 })
 
+
+//******* Sign Out Route ********************
 app.get('/signOut', (req, res, next) => {
   req.session.destroy(() => {
     res.redirect('/login')
   })
 })
 
+
+
+
+//******* Home Route ********************
 app.get('/home', (req, res, next) => {
   res.render('home');
 })
 
+
+
+
+
+//******* User Profile Routes ********************
 app.get('/userprofile', (req, res, next) => {
+
   user_id = req.session.user_id;
   db.users.findByPk(user_id).then((user) => {
     const name = user.name;
@@ -82,6 +94,8 @@ app.get('/userprofile', (req, res, next) => {
   })
 
 })
+
+
 
 app.listen(process.env.PORT || 3000, function () {
   console.log('Server running on port 3000');
