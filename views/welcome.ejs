@@ -1,0 +1,15 @@
+<%- include('partials/header.ejs', {auth: isAuthenticated}) %>
+
+
+<div class="welcomeContainer">
+    <div>
+        <h1>Need gift ideas?</h1>
+        <a href="/surveys" class="btn">Start</a>
+        <h3 id="giftReceiver"></h3>
+    </div>
+</div>
+
+
+
+
+<%- include('partials/footer.ejs', {auth: isAuthenticated}) %>

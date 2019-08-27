@@ -1,0 +1,12 @@
+<%- include('partials/header.ejs', {auth: false}) %>
+<div class="welcomeContainer">
+    <form action="/login" method="post">
+        <p>
+            <%= error_message %>
+        </p>
+        <% include partials/login_fields.ejs %>
+        <a href="/forgotPassword">Forgot password?</a>
+        <button type="submit" class="btn">Login</button>
+    </form>
+</div>
+<%- include('partials/header.ejs', {auth: false}) %>

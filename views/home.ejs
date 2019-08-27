@@ -1,24 +1,42 @@
 <html>
+<title>Gift Finder</title>
 
 <head>
-    <title>Etsy jQuery Demo</title>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Dosis' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="/css/home.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/gh/mgalante/jquery.redirect@master/jquery.redirect.js"></script>
     <script type="text/javascript" src="/js/etsy.js"></script>
-    <script type="text/javascript">
-
-    </script>
 </head>
 
 <body>
+    <div class="header"></div>
     <form id="etsy-search">
         <input id="etsy-terms" size="32">
         <button>Search!</button>
     </form>
-
-    <div id="etsy-images"></div>
-
-
-    <a href="/signOut">Sign Out</a>
+    <div class="main-content">
+        <div class="filter-section">
+            <div class="filter item-type">
+                <h3>Item Type</h3>
+                <label class="container check-container" value="`">All Items
+                    <input class='box' type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container check-container" value="`">Vintage
+                    <input class='box' type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container check-container" value="`">Hand Made
+                    <input class='box' type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+        </div>
+        <div class="container" id="etsy-images">
+        </div>
+    </div>
 </body>
 
 </html>
