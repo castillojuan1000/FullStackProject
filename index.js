@@ -109,11 +109,12 @@ app.get('/forgotPassword', (req, res) => {
 
 //! POST ROUTES
 app.post('/forgotPassword', (req, res) => {
+  console.log(req.body.email)
   if (req.body.email === '') {
     res.render('forgotPass', { message: 'Please enter an email.' })
   } else {
     db.users.findOne({ where: { email: req.body.email } }).then(async (user) => {
-      if (user === null) {
+      if (user.email === undefined) {
         res.render('forgotPass', { message: "I couldn't find that email in my records" })
       } else {
         const token = crypto.randomBytes(20).toString('hex');
@@ -146,6 +147,8 @@ app.post('/forgotPassword', (req, res) => {
       }
     }).then(() => {
       res.render('forgotPass', { message: 'Recovery email sent.' })
+    }).catch(() => {
+      res.render('forgotPass', { message: 'Email not found!' })
     })
   }
 })
