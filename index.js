@@ -35,10 +35,15 @@ app.set('view engine', 'ejs');
 app.set('views', './views');
 
 
+<<<<<<< HEAD
 /* 
   !GET ROUTES
   TODO: Implement all of the GET routes
 */
+=======
+
+//! *********Routes ********************
+>>>>>>> master
 app.get('/', (req, res, next) => {
   res.redirect('/welcome');
 })
@@ -55,10 +60,14 @@ app.get('/home', (req, res, next) => {
   res.render('home');
 });
 
+<<<<<<< HEAD
 app.get('/login', (req, res, next) => {
   res.render('login', { error_message: '' })
 })
 
+=======
+//******* signup Routes ********************
+>>>>>>> master
 app.get('/signup', (req, res) => {
   if (req.session.userId !== undefined) { // check and see if the user has userID
     res.redirect("/survey"); // then send them to the survey page 
@@ -68,11 +77,18 @@ app.get('/signup', (req, res) => {
 })
 
 
+
+//******* Sign Out Route ********************
 app.get('/signOut', (req, res, next) => {
   req.session.destroy()
   res.redirect('/login')
 })
 
+
+
+
+
+//******* User Profile Routes ********************
 app.get('/userprofile', (req, res, next) => {
   user_id = req.session.userId;
   db.users.findByPk(user_id).then((user) => {
