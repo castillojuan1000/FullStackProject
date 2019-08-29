@@ -67,6 +67,26 @@ app.get('/signup', (req, res) => {
   res.render('signup', { error: '' }) // this allows the request to be sent back to the user 
 })
 
+<<<<<<< HEAD
+=======
+app.post('/signup', (req, res, next) => {
+  var email = req.body.email;
+  var password = req.body.password;
+  var name = req.body.name;
+  bcrypt.hash(password, 10, (err, hash) => {// this allows the password to be private
+    db.users.create({ name: name, email: email, password_hash: hash }).then((user) => {
+      req.session.user_id = user.id;
+      res.redirect('/survey')
+    });
+  });
+})
+
+app.get('/survey',(req,res) => {
+  if(req.session.user_id != undefined){
+    res.render('survey');
+  }
+})
+>>>>>>> origin/joetta
 
 
 //******* Sign Out Route ********************
@@ -217,8 +237,8 @@ app.post('/updatePassword', (req, res) => {
 
 
 app.listen(process.env.PORT || 3000, function () {
-  console.log('Server running on port 3000');
-});
+  console.log('Server running on port 3000')
+})
 
 
 
