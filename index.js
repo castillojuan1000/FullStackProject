@@ -11,8 +11,8 @@ const db = require('./models');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 const app = express();
-const survey = JSON.parse(fs.readFileSync("./surveySet.json"))
-console.log(survey)
+const surveyJSON = require('./surveySet')
+
 //Connect sequelize session to our sequelize db
 var myStore = new SequelizeStore({
   db: db.sequelize
@@ -76,7 +76,12 @@ app.get('/signOut', (req, res, next) => {
   res.redirect('/login')
 })
 
-
+app.get('/survey', (req, res, next) => {
+  res.render('survey')
+})
+app.get('/surveyData', (req, res, next) => {
+  res.json(surveyJSON)
+})
 
 
 

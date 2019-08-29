@@ -1,4 +1,5 @@
-[
+
+module.exports = [
     {
         "question": "Who are you buying a gift for?",
         "type": "checkbox",
@@ -6,7 +7,7 @@
             "Female",
             "Male",
             "Child"
-        ]
+        ],
     },
     {
         "question": "Does this person like Vintage?",
@@ -60,7 +61,7 @@
     {
         "question": "What is your friend's date of birth?",
         "type": "input",
-        "choices": null
+        "choices": ["Month", "Day", "Year"]
     },
     {
         "question": "Does your friend like books?",
@@ -100,7 +101,7 @@
     {
         "question": "What is your favorite color?",
         "type": "input",
-        "choices": null
+        "choices": ["text"]
     },
     {
         "question": "Is your friend into arts & craft?",
@@ -127,3 +128,7 @@
         ]
     }
 ]
+
+
+
+
