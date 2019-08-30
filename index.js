@@ -13,6 +13,11 @@ const nodemailer = require('nodemailer');
 const app = express();
 const surveyJSON = require('./surveySet');
 
+
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+
 //* Amazon aws
 const AWS = require('aws-sdk');
 const s3 = new AWS.S3({
@@ -21,7 +26,7 @@ const s3 = new AWS.S3({
 })
 
 //Connect sequelize session to our sequelize db
-var myStore = new SequelizeStore({
+const myStore = new SequelizeStore({
   db: db.sequelize
 });
 
@@ -174,7 +179,7 @@ app.post('/forgotPassword', (req, res) => {
   }
 })
 app.post('/signup', (req, res, next) => {
-  var email = req.body.email.toLowerCase();
+  req.body.email.toLowerCase();
   var password = req.body.password;
   var name = req.body.name;
   bcrypt.hash(password, 10, (err, hash) => {// this allows the password to be private
