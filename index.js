@@ -1,7 +1,7 @@
 //Insert modules needed for the router
 const express = require('express');
-const fs = require('fs')
-const path = require('path')
+const fs = require('fs');
+const path = require('path');
 const ejs = require('ejs');
 const session = require('express-session');
 const bodyParser = require('body-parser');
@@ -9,8 +9,9 @@ const bcrypt = require('bcrypt');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const db = require('./models');
 const crypto = require('crypto');
-const nodemailer = require('nodemailer')
+const nodemailer = require('nodemailer');
 const app = express();
+const surveyJSON = require('./surveySet')
 
 //Connect sequelize session to our sequelize db
 var myStore = new SequelizeStore({
@@ -61,7 +62,7 @@ app.get('/login', (req, res, next) => {
 
 app.get('/signup', (req, res) => {
   if (req.session.userId !== undefined) { // check and see if the user has userID
-    res.redirect("/survey"); // then send them to the survey page 
+    res.redirect("/profile");
     return;
   }
   res.render('signup', { error: '' }) // this allows the request to be sent back to the user 
@@ -75,7 +76,12 @@ app.get('/signOut', (req, res, next) => {
   res.redirect('/login')
 })
 
-
+app.get('/survey', (req, res, next) => {
+  res.render('survey')
+})
+app.get('/surveyData', (req, res, next) => {
+  res.json(surveyJSON)
+})
 
 
 
@@ -83,12 +89,11 @@ app.get('/signOut', (req, res, next) => {
 app.get('/userprofile', (req, res, next) => {
   user_id = req.session.userId;
   db.users.findByPk(user_id).then((user) => {
-    const name = user.name;
-    const email = user.email;
-
+    const { name, email } = user
     res.render('userprofile', {
       name: name,
       email: email,
+      id: user_id
     });
   })
 
@@ -116,11 +121,12 @@ app.get('/forgotPassword', (req, res) => {
 
 //! POST ROUTES
 app.post('/forgotPassword', (req, res) => {
+  console.log(req.body.email)
   if (req.body.email === '') {
     res.render('forgotPass', { message: 'Please enter an email.' })
   } else {
     db.users.findOne({ where: { email: req.body.email } }).then(async (user) => {
-      if (user === null) {
+      if (user.email === undefined) {
         res.render('forgotPass', { message: "I couldn't find that email in my records" })
       } else {
         const token = crypto.randomBytes(20).toString('hex');
@@ -153,6 +159,8 @@ app.post('/forgotPassword', (req, res) => {
       }
     }).then(() => {
       res.render('forgotPass', { message: 'Recovery email sent.' })
+    }).catch(() => {
+      res.render('forgotPass', { message: 'Email not found!' })
     })
   }
 })
@@ -198,7 +206,7 @@ app.post('/updatePassword', (req, res) => {
       id: req.session.userId,
     }
   }).then(user => {
-    if (user != null) {
+    if (user.name != undefined) {
       bcrypt.hash(req.body.password, 10, function (err, hash) {
         user.update({
           passwordHash: hash,
@@ -241,8 +249,8 @@ app.post('/updatePassword', (req, res) => {
 
 //!Server Port
 app.listen(process.env.PORT || 3000, function () {
-  console.log('Server running on port 3000');
-});
+  console.log('Server running on port 3000')
+})
 
 
 

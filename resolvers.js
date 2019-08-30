@@ -1,5 +1,5 @@
 
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt')
 
 const resolvers = {
     Query: {
@@ -74,6 +74,12 @@ const resolvers = {
         async createUserLike(root, { listing, imgUrl, userId, title, price }, { models }) {
             const like = { listingId: listing, imgUrl: imgUrl, title: title, price: price, userId: userId }
             return models.likes.create(like)
+        },
+        async removeUserLike(root, { id }, { models }) {
+            await models.likes.destroy({
+                where: { id: id }
+            })
+            return `Removed like with id of ${id}`
         }
     },
     User: {

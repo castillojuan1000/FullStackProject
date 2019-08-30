@@ -47,8 +47,6 @@ align-items: center;
 
 footer{
     display: flex;
-    position: absolute;
-    bottom: 0px;
     box-shadow: 2px 2px grey;
     padding: 0 5%;
     width: 100%;
@@ -57,7 +55,6 @@ footer{
     background: #333;
     justify-content: center;
     align-items: center;
-    bottom:  0px;
     a{
         text-decoration: none;
         color: white;
@@ -74,9 +71,6 @@ footer{
         font-size: 50px;
         font-weight: 100;
         letter-spacing: 2px;
-    }
-    a{
-
     }
     form{
         display: flex;

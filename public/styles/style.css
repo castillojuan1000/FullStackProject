@@ -55,8 +55,6 @@ footer {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  position: absolute;
-  bottom: 0px;
   -webkit-box-shadow: 2px 2px grey;
           box-shadow: 2px 2px grey;
   padding: 0 5%;
@@ -70,7 +68,6 @@ footer {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  bottom: 0px;
 }
 
 footer a {

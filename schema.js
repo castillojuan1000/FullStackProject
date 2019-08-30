@@ -56,6 +56,7 @@ type Mutation {
     removeSurvey(surveyId: Int!): String!
     removeUser(id: Int!): String!
     createUserLike(listing: Int! imgUrl: String! userId: Int! title: String! price: Int!): Likes!
+    removeUserLike(id: Int!): String!
 }
 
 `

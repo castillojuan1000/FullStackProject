@@ -1,4 +1,5 @@
-<%- include("partials/header.ejs", {auth: true}) %>
+<%- include('partials/header.ejs', {auth: true}) %>
+<id value="<%=id%>"></id>
 <div class="container">
   <div class="row profile">
     <div class="col-md-3">
@@ -10,7 +11,7 @@
         <!-- END SIDEBAR USERPIC -->
         <!-- SIDEBAR USER TITLE -->
         <div class="profile-usertitle">
-          <div class="profile-usertitle-name">
+          <div id="userName" data-userId="<%=id%>" class="profile-usertitle-name">
             <%=name%>
           </div>
           <div class="profile-usertitle-email">
