@@ -222,7 +222,7 @@
 .accountSettings-content{
 
 	margin: 0;
-	/* overflow-x: hidden;  */
+	overflow-x: hidden; 
 	padding: 0;
 	height: 87vh;
 }
@@ -363,7 +363,7 @@
 	justify-content: center;
 	margin-right: 20px;
 	background-size: contain;
-	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+	/* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); */
 }
 
 .img-upload-container h4 {

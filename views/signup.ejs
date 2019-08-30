@@ -2,17 +2,20 @@
 
 <body>
   <div class="welcomeContainer">
+
     <!-- sign up section  -->
     <form action="/signup" method="POST">
+      <h1>Sign Up</h1>
+      <br>
+      <p>Please fill in this form to create an account.</p>
       <% if(error){ %>
       <h3 style="color: red"><%= error %></h3>
       <a href="/forgotPassword">Forgot Password</a>
       <% } %>
       <label for="name">Name</label>
       <input type="text" name="name" />
-      <br />
-      <br />
       <% include partials/login_fields.ejs %>
+      <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
       <button class="btn" type="submit">Sign Up</button>
     </form>
   </div>

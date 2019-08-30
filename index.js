@@ -11,7 +11,14 @@ const db = require('./models');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 const app = express();
-const surveyJSON = require('./surveySet')
+const surveyJSON = require('./surveySet');
+
+//* Amazon aws
+const AWS = require('aws-sdk');
+const s3 = new AWS.S3({
+  accessKeyId: process.env.AWS_ACCESS_KEY,
+  secretAccessKey: process.env.AWS_SECRET_KEY
+})
 
 //Connect sequelize session to our sequelize db
 var myStore = new SequelizeStore({
@@ -89,12 +96,13 @@ app.get('/surveyData', (req, res, next) => {
 app.get('/userprofile', (req, res, next) => {
   user_id = req.session.userId;
   db.users.findByPk(user_id).then((user) => {
-    const name = user.name;
-    const email = user.email;
-
+    console.log(user.phoroUrl)
+    const { name, email, photo_url } = user
     res.render('userprofile', {
       name: name,
       email: email,
+      id: user_id,
+      photo: photo_url
     });
   })
 
@@ -166,7 +174,7 @@ app.post('/forgotPassword', (req, res) => {
   }
 })
 app.post('/signup', (req, res, next) => {
-  var email = req.body.email;
+  var email = req.body.email.toLowerCase();
   var password = req.body.password;
   var name = req.body.name;
   bcrypt.hash(password, 10, (err, hash) => {// this allows the password to be private
@@ -179,8 +187,9 @@ app.post('/signup', (req, res, next) => {
   })
 })
 
+
 app.post('/login', (req, res, next) => {
-  const email = req.body.email;
+  const email = req.body.email.toLowerCase();
   const password = req.body.password
   db.users.findOne({ where: { email: email } }).then(user => {
     if (user === null) {
@@ -189,9 +198,12 @@ app.post('/login', (req, res, next) => {
       bcrypt.compare(password, user.passwordHash, function (err, matched) {
         if (matched) {
           req.session.userId = user.id
+          const { id, name, email, photo_url } = user
           res.render('userprofile', {
-            name: user.name,
-            email: user.email
+            id: id,
+            name: name,
+            email: email,
+            photo: photo_url,
           });
         } else {
           res.render("login", { error_message: "Please check your username & password" })
@@ -221,7 +233,32 @@ app.post('/updatePassword', (req, res) => {
   })
 })
 
+app.post("/upload", (req, res, next) => {
+  if (Object.keys(req.files).length == 0) {
+    return res.status(400).send('No files were uploaded.');
+  }
+  // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+  let profilePic = req.files.profilePic;
+  let fileName = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+  let user_id = req.session.user_id;
+  const params = {
+    Bucket: 'chirperimages',
+    Key: `${fileName}.jpeg`,
+    Body: profilePic.data,
+    ACL: 'public-read'
+  }
+  s3.upload(params, function (Err, data) {
+    if (Err) throw Err
+    console.log(data.Location)//Logs the url to the s3 upload
+    db.users.findOne({ where: { id: user_id } }).then(user => {
+      user.update({ photo_url: `${data.Location}` }).then(() => {
+        res.json("Uploaded new pic");
+      })
+    })
+  });
+});
 
+//!Server Port
 app.listen(process.env.PORT || 3000, function () {
   console.log('Server running on port 3000')
 })
@@ -237,3 +274,6 @@ const resolvers = require('./resolvers');
 models = db
 const apolloServ = new ApolloServer({ typeDefs, resolvers, context: { models } })
 apolloServ.applyMiddleware({ app })
+
+
+db.users.findOne({ where: { id: 1 } }).then(user => console.log(user))

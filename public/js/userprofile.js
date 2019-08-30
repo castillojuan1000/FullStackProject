@@ -13,6 +13,9 @@ const likedGiftsContent = document.getElementById('likedGifts-content');
 
 const profileContentBtns = [overviewBtn, accountSettingsBtn, wishListBtn, likedGiftsBtn];
 
+//UserID passed from the backend in an HTML element
+const userId = Number(document.querySelector('#userName').getAttribute('data-userId'));
+
 
 overviewBtn.addEventListener('click', function (event) {
   event.preventDefault();
@@ -86,7 +89,6 @@ wishListBtn.addEventListener('click', function (event) {
 
 likedGiftsBtn.addEventListener('click', function (event) {
   event.preventDefault();
-
   //add display=none to the content not selected 
   overviewContent.style.display = 'none';
   accountSettingsContent.style.display = "none";
@@ -97,14 +99,15 @@ likedGiftsBtn.addEventListener('click', function (event) {
   profileContentBtns.map(button => {
     if (button.classList.contains('active')) {
       return button.classList.remove('active');
-
     }
     return;
   })
-
   likedGiftsBtn.classList.add("active");
-
 })
+
+
+//! changing profile pic
+
 
 
 

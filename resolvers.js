@@ -32,12 +32,15 @@ const resolvers = {
                     surveysId: surveyId
                 }
             })
+        },
+        async getUserLikes(root, { userId }, { models }) {
+            return models.likes.findAll({ where: { userId: userId } })
         }
     },
     Mutation: {
         async createUser(root, { name, email, password }, { models }) {
             var encryptedPass = await hashPass(password)
-            const user = { name: name, email: email, passwordHash: encryptedPass }
+            const user = { name: name, email: email.toLowerCase(), passwordHash: encryptedPass }
             return models.users.create(user)
         },
         async createSurvey(root, { user_id, name }) {
@@ -67,6 +70,16 @@ const resolvers = {
             }
             await models.users.destroy({ where: { id: id } })
             return `Deleted user with id of ${id}`
+        },
+        async createUserLike(root, { listing, imgUrl, userId, title, price }, { models }) {
+            const like = { listingId: listing, imgUrl: imgUrl, title: title, price: price, userId: userId }
+            return models.likes.create(like)
+        },
+        async removeUserLike(root, { id }, { models }) {
+            await models.likes.destroy({
+                where: { id: id }
+            })
+            return `Removed like with id of ${id}`
         }
     },
     User: {
@@ -93,6 +106,11 @@ const resolvers = {
     Categories: {
         async survey(categories) {
             return categories.getSurvey()
+        }
+    },
+    Likes: {
+        async user(user) {
+            return user.getLike()
         }
     }
 }

@@ -6,6 +6,7 @@ type User {
     name: String!
     email: String!
     passwordHash: String!
+    photoUrl: String!
     surveys: [Surveys!]
 }
 
@@ -25,11 +26,18 @@ type Answers {
     survey: Surveys!
     required: Boolean!
 }
-
 type Categories {
     id: ID!
     name: String!
     survey: Surveys!
+}
+type Likes{
+    id: ID!
+    listingId: Int!
+    imgUrl: String!
+    title: String!
+    price: Int!
+    user: User!
 }
 
 type Query{
@@ -39,6 +47,7 @@ type Query{
     getUserSurveys(userId: Int!): [Surveys!]!
     getSurveyAnswers(surveyId: Int!): [Answers!]!
     getSurveyCategories(surveyId: Int!): [Categories]!
+    getUserLikes(userId: Int!): [Likes!]
 }
 type Mutation {
     createUser(name: String! email: String! password: String!): User!
@@ -47,6 +56,8 @@ type Mutation {
     createCategory(surveyId: Int! name: String!): Categories!
     removeSurvey(surveyId: Int!): String!
     removeUser(id: Int!): String!
+    createUserLike(listing: Int! imgUrl: String! userId: Int! title: String! price: Int!): Likes!
+    removeUserLike(id: Int!): String!
 }
 
 `

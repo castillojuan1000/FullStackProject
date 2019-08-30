@@ -17,10 +17,10 @@
     </div>
     <div class="settings-section">
       <h2 class="settings-title">My profile</h2>
-      <form class="form my-form">
+      <form class="form my-form" action="/upload" method="POST" enctype="multipart/form-data">
         <div class="img-upload-container">
           <label class="img-upload btn btn-bwm" style="background-image: url(&quot;/profile-placeholder.jpg&quot;);">
-            <input type="file" accept=".jpg, .png, .jpeg, .gif" value="">
+            <input type="file" accept=".jpg, .png, .jpeg, .gif" value="hello world" name="image" />
           </label>
           <h4>Change Your Profile Picture</h4>
           <div class="img-preview-container">
@@ -36,7 +36,7 @@
     </div>
     <div class="settings-section">
       <h2 class="settings-title">Password</h2>
-      <form class="form my-form">
+      <form class="form my-form" method="POST" action="/updatePassword">
         <div class="form-group">
           <div class="input-group">
             <input name="currentPassword" placeholder="Old Password" type="password" class="form-control"

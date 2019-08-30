@@ -32,6 +32,10 @@ module.exports = function (sequelize, DataTypes) {
 			type: DataTypes.STRING,
 			field: 'reset_password_token'
 		},
+		photo_url: {
+			defaultValue: '/images/profileDefault.png',
+			type: DataTypes.STRING
+		},
 		createdAt: {
 			type: DataTypes.DATE,
 			allowNull: false,
@@ -47,6 +51,7 @@ module.exports = function (sequelize, DataTypes) {
 		});
 	users.associate = function (models) {
 		users.hasMany(models.surveys)
+		users.hasMany(models.likes, { foreignKey: 'userId' })
 	};
 	return users
 };
