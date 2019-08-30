@@ -6,6 +6,7 @@ type User {
     name: String!
     email: String!
     passwordHash: String!
+    photoUrl: String!
     surveys: [Surveys!]
 }
 

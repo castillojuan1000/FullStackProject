@@ -32,6 +32,10 @@ module.exports = function (sequelize, DataTypes) {
 			type: DataTypes.STRING,
 			field: 'reset_password_token'
 		},
+		photo_url: {
+			defaultValue: '/images/profileDefault.png',
+			type: DataTypes.STRING
+		},
 		createdAt: {
 			type: DataTypes.DATE,
 			allowNull: false,

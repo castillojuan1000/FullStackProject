@@ -40,7 +40,7 @@ const resolvers = {
     Mutation: {
         async createUser(root, { name, email, password }, { models }) {
             var encryptedPass = await hashPass(password)
-            const user = { name: name, email: email, passwordHash: encryptedPass }
+            const user = { name: name, email: email.toLowerCase(), passwordHash: encryptedPass }
             return models.users.create(user)
         },
         async createSurvey(root, { user_id, name }) {
