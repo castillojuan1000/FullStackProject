@@ -5,6 +5,16 @@ module.exports = {
     "database": "fullstackproject",
     "host": process.env.DBURL,
     "dialect": "postgres",
-    "operatorsAliases": false
+    "operatorsAliases": false,
+    "logging": false
+  },
+  "local": {
+    "username": process.env.DBUSER,
+    "password": process.env.DBLOCALPASS,
+    "database": "fullstackproject",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "operatorsAliases": false,
+    "logging": false
   }
 }

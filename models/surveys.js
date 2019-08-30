@@ -1,7 +1,7 @@
 /* jshint indent: 1 */
 
 module.exports = function (sequelize, DataTypes) {
-	const categories = sequelize.define('categories', {
+	const surveys = sequelize.define('surveys', {
 		id: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
@@ -14,14 +14,14 @@ module.exports = function (sequelize, DataTypes) {
 			allowNull: true,
 			field: 'name'
 		},
-		surveysId: {
+		userId: {
 			type: DataTypes.INTEGER,
 			allowNull: true,
 			references: {
-				model: 'surveys',
+				model: 'users',
 				key: 'id'
 			},
-			field: 'surveysId'
+			field: 'userId'
 		},
 		createdAt: {
 			type: DataTypes.DATE,
@@ -34,10 +34,12 @@ module.exports = function (sequelize, DataTypes) {
 			field: 'updatedAt'
 		}
 	}, {
-			tableName: 'categories'
+			tableName: 'surveys'
 		});
-	categories.associate = function (models) {
-		categories.belongsTo(models.surveys, { foreignKey: 'surveysId' })
+	surveys.associate = function (models) {
+		surveys.belongsTo(models.users, { foreignKey: 'userId' })
+		surveys.hasMany(models.answers, { foreignKey: 'surveysId' })
+		surveys.hasMany(models.categories, { foreignKey: 'surveysId' })
 	}
-	return categories
+	return surveys
 };

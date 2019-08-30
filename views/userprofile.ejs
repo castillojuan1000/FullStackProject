@@ -1,122 +1,104 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('partials/header.ejs', {auth: true}) %>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>User Profile</title>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
-    integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css'>
-  <link rel="stylesheet" href="styles/userprofile.css">
-
-</head>
-
-<body>
-  <div class="container">
-    <div class="row profile">
-      <div class="col-md-3">
-        <div class="profile-sidebar">
-          <!-- SIDEBAR USERPIC -->
-          <div class="profile-userpic">
-            <img src="images/test1.png" class="img-responsive" alt="">
-          </div>
-          <!-- END SIDEBAR USERPIC -->
-          <!-- SIDEBAR USER TITLE -->
-          <div class="profile-usertitle">
-            <div class="profile-usertitle-name">
-              <%=name%>
-            </div>
-            <div class="profile-usertitle-email">
-              <%=email%>
-            </div>
-          </div>
-          <!-- END SIDEBAR USER TITLE -->
-          <!-- SIDEBAR BUTTONS -->
-          <div class="profile-userbuttons">
-            <button type="button" class="btn btn-success btn-sm">Follow</button>
-            <button type="button" class="btn btn-primary btn-sm">Message</button>
-          </div>
-          <!-- END SIDEBAR BUTTONS -->
-          <!-- SIDEBAR MENU -->
-          <div class="profile-usermenu">
-            <ul class="nav">
-              <li class="overview active">
-                <a href="#">
-                  <i class="glyphicon glyphicon-home"></i>
-                  Overview </a>
-              </li>
-              <li class=" account-settings">
-                <a href="#">
-                  <i class="glyphicon glyphicon-user"></i>
-                  Account Settings </a>
-              </li>
-              <li class="wish-list">
-                <a href="#">
-                  <i class="glyphicon glyphicon-ok"></i>
-                  Wish List </a>
-              </li>
-              <li class="liked-gifts">
-                <a href="#">
-                  <!-- <i class="glyphicon glyphicon-flag"></i> -->
-                  <i class="fas fa-thumbs-up"></i>
-                  Liked Gifts </a>
-              </li>
-            </ul>
-          </div>
-          <!-- END MENU -->
-
-          <div class="portlet light bordered">
-            <div>
-              <h4 class="profile-desc-title">About <%=name%></h4>
-              <span class="profile-desc-text"> Lorem ipsum dolor sit amet diam nonummy nibh dolore. </span>
-              <div class="margin-top-20 profile-desc-link">
-                <i class="fa fa-globe"></i>
-                <a href="hhttps://www.digitalcrafts.com">GiftToYou.com</a>
-              </div>
-              <div class="margin-top-20 profile-desc-link">
-                <i class="fa fa-twitter"></i>
-                <a href="https://twitter.com/DgtlCrafts">@Gift2You</a>
-              </div>
-              <div class="margin-top-20 profile-desc-link">
-                <i class="fa fa-facebook"></i>
-                <a href="https://www.facebook.com/digitalcraftsllc/">GiftToYou</a>
-
-              </div>
-            </div>
-          </div>
-
-
-
+<div class="container">
+  <div class="row profile">
+    <div class="col-md-3">
+      <div class="profile-sidebar">
+        <!-- SIDEBAR USERPIC -->
+        <div class="profile-userpic">
+          <img src="images/test1.png" class="img-responsive" alt="">
         </div>
+        <!-- END SIDEBAR USERPIC -->
+        <!-- SIDEBAR USER TITLE -->
+        <div class="profile-usertitle">
+          <div class="profile-usertitle-name">
+            <%=name%>
+          </div>
+          <div class="profile-usertitle-email">
+            <%=email%>
+          </div>
+        </div>
+        <!-- END SIDEBAR USER TITLE -->
+        <!-- SIDEBAR BUTTONS -->
+        <div class="profile-userbuttons">
+          <button type="button" class="btn btn-success btn-sm">Follow</button>
+          <button type="button" class="btn btn-primary btn-sm">Message</button>
+        </div>
+        <!-- END SIDEBAR BUTTONS -->
+        <!-- SIDEBAR MENU -->
+        <div class="profile-usermenu">
+          <ul class="nav">
+            <li class="overview active" id="overview">
+              <a href="#">
+                <i class="glyphicon glyphicon-home"></i>
+                Overview </a>
+            </li>
+            <li class=" account-settings" id="account-settings">
+              <a href="#">
+                <i class="glyphicon glyphicon-user"></i>
+                Account Settings </a>
+            </li>
+            <li class="wish-list" id="wish-list">
+              <a href="#">
+                <i class="glyphicon glyphicon-ok"></i>
+                Wish List </a>
+            </li>
+            <li class="liked-gifts" id="liked-gifts">
+              <a href="#">
+                <!-- <i class="glyphicon glyphicon-flag"></i> -->
+                <i class="fas fa-thumbs-up"></i>
+                Liked Gifts </a>
+            </li>
+          </ul>
+        </div>
+        <!-- END MENU -->
+
+        <div class="portlet light bordered">
+          <div>
+            <h4 class="profile-desc-title">About <%=name%></h4>
+            <span class="profile-desc-text"> Lorem ipsum dolor sit amet diam nonummy nibh dolore. </span>
+            <div class="margin-top-20 profile-desc-link">
+              <i class="fa fa-globe"></i>
+              <a href="hhttps://www.digitalcrafts.com">GiftToYou.com</a>
+            </div>
+            <div class="margin-top-20 profile-desc-link">
+              <i class="fa fa-twitter"></i>
+              <a href="https://twitter.com/DgtlCrafts">@Gift2You</a>
+            </div>
+            <div class="margin-top-20 profile-desc-link">
+              <i class="fa fa-facebook"></i>
+              <a href="https://www.facebook.com/digitalcraftsllc/">GiftToYou</a>
+
+            </div>
+          </div>
+        </div>
+
+
+
       </div>
+    </div>
 
-      <div class="col-md-9">
-        <div class="profile-content">
+    <div class="col-md-9">
+      <div class="profile-content">
 
-          <div class="overview-content" style="display: none">
-            overview content goes here...
-          </div>
-
-          <div class="accountSettings-content">
-            <% include partials/userprofile_settings.ejs %>
-          </div>
-
-          <div class="wishList-content" style="display: none">
-            Wish list content goes here...
-          </div>
-
-          <div class="likedGifts-content" style="display: none">
-            Liked Gifts content goes here...
-          </div>
-
+        <div class="overview-content" id="overview-content">
+          overview content goes here...
         </div>
+
+        <div class="accountSettings-content" id="accountSettings-content" style="display: none">
+          <% include partials/userprofile_settings.ejs %>
+        </div>
+
+        <div class="wishList-content" id="wishList-content" style="display: none">
+          Wish list content goes here...
+        </div>
+
+        <div class="likedGifts-content" id="likedGifts-content" style="display: none">
+          Liked Gifts content goes here...
+        </div>
+
       </div>
     </div>
   </div>
-  <script src="js/userprofile.js"></script>
-</body>
-
-</html>
+</div>
+<%- include('partials/footer.ejs', {auth: true}) %>

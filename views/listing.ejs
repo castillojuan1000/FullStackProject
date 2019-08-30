@@ -1,0 +1,28 @@
+<html>
+    <title>Gift Finder</title>
+
+    <head>
+            <link href='https://fonts.googleapis.com/css?family=Dosis' rel='stylesheet' type='text/css'>
+            <link  rel="stylesheet" type="text/css" href="/css/listing.css">
+        
+        <script type="text/javascript">
+            var info = <%- JSON.stringify(info) %>
+            console.log(info)
+        </script>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+        <script type="text/javascript" src="/js/listing.js"></script>
+    </head>
+    <body>
+        <div class="header"></div>
+        <div class="main-content">
+            <div class="title-header">
+                <h1><%- info.title %></h1>
+            </div>
+            <div class="image-holder">
+                <img src="<%= info.image %>">
+            </div>
+        </div>
+    </body>
+
+</html>
+

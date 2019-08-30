@@ -11,7 +11,8 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
-      surveys_id: {
+      surveysId: {
+        allowNull: false,
         type: Sequelize.INTEGER,
         references: {
           model: 'surveys', // this is refering to surveys ID , in order for the tables to be connected 
