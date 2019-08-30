@@ -157,7 +157,7 @@ app.post('/forgotPassword', (req, res) => {
   }
 })
 app.post('/signup', (req, res, next) => {
-  var email = req.body.email;
+  var email = req.body.email.toLowerCase();
   var password = req.body.password;
   var name = req.body.name;
   bcrypt.hash(password, 10, (err, hash) => {// this allows the password to be private
@@ -255,6 +255,3 @@ const resolvers = require('./resolvers');
 models = db
 const apolloServ = new ApolloServer({ typeDefs, resolvers, context: { models } })
 apolloServ.applyMiddleware({ app })
-
-
-db.users.findAll({ where: { id: 1 } }).then(res => console.log(res))

@@ -97,17 +97,19 @@ likedGiftsBtn.addEventListener('click', function (event) {
   profileContentBtns.map(button => {
     if (button.classList.contains('active')) {
       return button.classList.remove('active');
-
     }
     return;
   })
-
   likedGiftsBtn.classList.add("active");
+  getUserLikes(2).then(res => console.log(res))
 
 })
 
 
 //! changing profile pic
+
+
+
 
 
 
