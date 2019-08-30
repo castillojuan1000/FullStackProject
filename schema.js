@@ -59,7 +59,6 @@ type Mutation {
     createUserLike(listing: Int! imgUrl: String! userId: Int! title: String! price: Int!): Likes!
     removeUserLike(id: Int!): String!
 }
-
 `
 
 module.exports = typeDefs

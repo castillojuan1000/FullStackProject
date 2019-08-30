@@ -4,13 +4,15 @@ module.exports = [
         "question": "Who are you buying a gift for?",
         "type": "checkbox",
         "choices": [
-            "Female",
-            "Male",
-            "Child"
+            "Mother",
+            "Father",
+            "Child",
+            "Spouse",
+            "Friend"
         ],
     },
     {
-        "question": "Does this person like Vintage?",
+        "question": "Is this person into Vintage items?",
         "type": "radio",
         "choices": [
             "Yes",
@@ -27,7 +29,8 @@ module.exports = [
             "Making Jewelry",
             "Knitting",
             "Fashion",
-            "Music"
+            "Music",
+            "I do not know."
         ]
     },
     {
@@ -38,7 +41,6 @@ module.exports = [
             "Candels",
             "Hygeine Products",
             "Glass",
-            "Purse",
             "Accessories",
             "Toys"
         ]
@@ -64,7 +66,7 @@ module.exports = [
         "choices": ["Month", "Day", "Year"]
     },
     {
-        "question": "Does your friend like books?",
+        "question": "Does this person like books?",
         "type": "radio",
         "choices": [
             "Yes",
@@ -76,14 +78,13 @@ module.exports = [
         "type": "radio",
         "choices": [
             "Bath & Beauty",
-            "Ceramics & Pottery",
-            "Accessories",
-            "Jewelry",
-            "Supplies"
+            "Cleaning Supplies",
+            "Arts & Craft Supplies",
+            "Snacks"
         ]
     },
     {
-        "question": "Does your friend wear Jewelry??",
+        "question": "Does this person like wearing Jewelry?",
         "type": "radio",
         "choices": [
             "Yes",
@@ -91,7 +92,7 @@ module.exports = [
         ]
     },
     {
-        "question": "Do your friend own a pet??",
+        "question": "Does this person own a pet?",
         "type": "radio",
         "choices": [
             "Yes",
@@ -99,7 +100,7 @@ module.exports = [
         ]
     },
     {
-        "question": "What is your favorite color?",
+        "question": "What is this person's favorite color?",
         "type": "input",
         "choices": ["text"]
     },
@@ -112,7 +113,7 @@ module.exports = [
         ]
     },
     {
-        "question": "Do your friend own a home?",
+        "question": "Does this person own a home?",
         "type": "radio",
         "choices": [
             "Yes",

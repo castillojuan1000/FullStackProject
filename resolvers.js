@@ -1,5 +1,8 @@
 
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
+
+const SURVEY_ADDED = 'SURVEY_ADDED'
+
 
 const resolvers = {
     Query: {

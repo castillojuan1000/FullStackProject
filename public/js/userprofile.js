@@ -103,6 +103,7 @@ likedGiftsBtn.addEventListener('click', function (event) {
     return;
   })
   likedGiftsBtn.classList.add("active");
+  getUserSurveys(userId).then(res => console.log(res))
 })
 
 

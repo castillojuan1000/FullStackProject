@@ -97,7 +97,6 @@ app.get('/surveyData', (req, res, next) => {
 app.get('/userprofile', (req, res, next) => {
   user_id = req.session.userId;
   db.users.findByPk(user_id).then((user) => {
-    console.log(user.phoroUrl)
     const { name, email, photo_url } = user
     res.render('userprofile', {
       name: name,
@@ -176,10 +175,9 @@ app.post('/forgotPassword', (req, res) => {
 })
 app.post('/signup', (req, res, next) => {
   req.body.email.toLowerCase();
-  var password = req.body.password;
-  var name = req.body.name;
+  const { password, name, email } = req.body
   bcrypt.hash(password, 10, (err, hash) => {// this allows the password to be private
-    db.users.create({ name: name, email: email, passwordHash: hash }).then((user) => {
+    db.users.create({ name: name, email: email.toLowerCase(), passwordHash: hash }).then((user) => {
       req.session.userId = user.id;
       res.redirect('/')
     }).catch(err => {
@@ -268,10 +266,14 @@ app.listen(process.env.PORT || 3000, function () {
 
 
 //! Apollo set up
-const { ApolloServer, gql } = require('apollo-server-express');
+const { ApolloServer, gql, PubSub } = require('apollo-server-express');
 const { makeExecutableSchema } = require('graphql-tools');
 const typeDefs = require('./schema');
 const resolvers = require('./resolvers');
+const executableSchema = makeExecutableSchema({
+  typeDefs,
+  resolvers
+})
 models = db
 const apolloServ = new ApolloServer({ typeDefs, resolvers, context: { models } })
 apolloServ.applyMiddleware({ app })

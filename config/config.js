@@ -1,9 +1,9 @@
 module.exports = {
   "development": {
     "username": process.env.DBUSER,
-    "password": process.env.DBPASS,
+    "password": process.env.DBLOCALPASS || null,
     "database": "fullstackproject",
-    "host": process.env.DBURL,
+    "host": "127.0.0.1",
     "dialect": "postgres",
     "operatorsAliases": false,
     "logging": false

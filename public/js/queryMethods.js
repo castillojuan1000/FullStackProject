@@ -34,9 +34,9 @@ async function getUserLikes(id) {
  * @param {Integer} id Receives the primary key for a survey
  * @returns {Array} : Returns an array of user surveys including the name & answers
  */
-async function getuserSurveys(id) {
+async function getUserSurveys(id) {
     const query = `query{
-        getUserSurveys(userId: ${id}){
+        getUserSurveys(userId: ${Number(id)}){
         id
         name
         answers{
