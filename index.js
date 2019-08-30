@@ -14,10 +14,6 @@ const app = express();
 const surveyJSON = require('./surveySet');
 
 
-if (process.env.NODE_ENV !== "production") {
-  require("dotenv").config();
-}
-
 //* Amazon aws
 const AWS = require('aws-sdk');
 const s3 = new AWS.S3({
