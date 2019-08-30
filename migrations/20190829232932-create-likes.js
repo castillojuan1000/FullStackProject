@@ -8,10 +8,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      listing_id: {
+      listingId: {
         type: Sequelize.INTEGER
       },
-      img_url: {
+      imgUrl: {
         type: Sequelize.STRING
       },
       title: {
@@ -20,7 +20,7 @@ module.exports = {
       price: {
         type: Sequelize.INTEGER
       },
-      user_id: {
+      userId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {

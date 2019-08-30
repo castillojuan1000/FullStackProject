@@ -16,7 +16,8 @@ module.exports = {
     "password": null,
     "database": "fullstackproject",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "logging": false,
   }
 
 

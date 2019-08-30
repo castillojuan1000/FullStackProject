@@ -31,6 +31,14 @@ type Categories {
     name: String!
     survey: Surveys!
 }
+type Likes{
+    id: ID!
+    listingId: Int!
+    imgUrl: String!
+    title: String!
+    price: Int!
+    user: User!
+}
 
 type Query{
     getUser(id: Int!): User!
@@ -39,6 +47,7 @@ type Query{
     getUserSurveys(userId: Int!): [Surveys!]!
     getSurveyAnswers(surveyId: Int!): [Answers!]!
     getSurveyCategories(surveyId: Int!): [Categories]!
+    getUserLikes(id: Int!): Likes!
 }
 type Mutation {
     createUser(name: String! email: String! password: String!): User!
@@ -47,6 +56,7 @@ type Mutation {
     createCategory(surveyId: Int! name: String!): Categories!
     removeSurvey(surveyId: Int!): String!
     removeUser(id: Int!): String!
+    addUserLike(listing: Int! imgUrl: String! userId: Int! title: String! price: Int!): Likes!
 }
 
 `

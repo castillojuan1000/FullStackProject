@@ -32,6 +32,9 @@ const resolvers = {
                     surveysId: surveyId
                 }
             })
+        },
+        async getUserLikes(root, { id }, { models }) {
+            return models.likes.findAll({ where: { userId: id } })
         }
     },
     Mutation: {
@@ -67,6 +70,10 @@ const resolvers = {
             }
             await models.users.destroy({ where: { id: id } })
             return `Deleted user with id of ${id}`
+        },
+        async addUserLike(root, { listing, imgUrl, userId, title, price }, { models }) {
+            const like = { listingId: listing, imgUrl: imgUrl, title: title, price: price, userId: userId }
+            return models.likes.create(like)
         }
     },
     User: {
@@ -93,6 +100,11 @@ const resolvers = {
     Categories: {
         async survey(categories) {
             return categories.getSurvey()
+        }
+    },
+    Likes: {
+        async user(user) {
+            return user.getLikes()
         }
     }
 }
