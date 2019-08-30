@@ -274,6 +274,3 @@ const resolvers = require('./resolvers');
 models = db
 const apolloServ = new ApolloServer({ typeDefs, resolvers, context: { models } })
 apolloServ.applyMiddleware({ app })
-
-
-db.users.findOne({ where: { id: 1 } }).then(user => console.log(user))
