@@ -170,6 +170,7 @@ app.post('/signup', (req, res, next) => {
   })
 })
 
+
 app.post('/login', (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password
@@ -212,7 +213,33 @@ app.post('/updatePassword', (req, res) => {
   })
 })
 
+// app.post("/upload", (req, res, next) => {
+//   if (Object.keys(req.files).length == 0) {
+//     return res.status(400).send('No files were uploaded.');
+//   }
 
+//   // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+//   let profilePic = req.files.profilePic;
+//   let fileName = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+//   let user_id = req.session.user_id;
+//   const params = {
+//     Bucket: 'chirperimages',
+//     Key: `${fileName}.jpeg`,
+//     Body: profilePic.data,
+//     ACL: 'public-read'
+//   }
+//   s3.upload(params, function (Err, data) {
+//     if (Err) throw Err
+//     console.log(data.Location)//Logs the url to the s3 upload
+//     db.users.findOne({ where: { id: user_id } }).then(user => {
+//       user.update({ photos: `${data.Location}` }).then(() => {
+//         res.redirect('/welcome');
+//       })
+//     })
+//   });
+// });
+
+//!Server Port
 app.listen(process.env.PORT || 3000, function () {
   console.log('Server running on port 3000');
 });

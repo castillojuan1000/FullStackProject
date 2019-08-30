@@ -47,6 +47,7 @@ module.exports = function (sequelize, DataTypes) {
 		});
 	users.associate = function (models) {
 		users.hasMany(models.surveys)
+		users.hasMany(models.likes)
 	};
 	return users
 };
