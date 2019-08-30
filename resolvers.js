@@ -33,8 +33,8 @@ const resolvers = {
                 }
             })
         },
-        async getUserLikes(root, { id }, { models }) {
-            return models.likes.findAll({ where: { userId: id } })
+        async getUserLikes(root, { userId }, { models }) {
+            return models.likes.findAll({ where: { userId: userId } })
         }
     },
     Mutation: {
@@ -71,7 +71,7 @@ const resolvers = {
             await models.users.destroy({ where: { id: id } })
             return `Deleted user with id of ${id}`
         },
-        async addUserLike(root, { listing, imgUrl, userId, title, price }, { models }) {
+        async createUserLike(root, { listing, imgUrl, userId, title, price }, { models }) {
             const like = { listingId: listing, imgUrl: imgUrl, title: title, price: price, userId: userId }
             return models.likes.create(like)
         }
@@ -104,7 +104,7 @@ const resolvers = {
     },
     Likes: {
         async user(user) {
-            return user.getLikes()
+            return user.getLike()
         }
     }
 }
