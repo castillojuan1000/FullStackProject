@@ -95,6 +95,7 @@ app.get('/surveyData', (req, res, next) => {
 
 //******* User Profile Routes ********************
 app.get('/userprofile', (req, res, next) => {
+  //* Getting user ID from session
   user_id = req.session.userId;
   db.users.findByPk(user_id).then((user) => {
     console.log(user.phoroUrl)
@@ -106,7 +107,6 @@ app.get('/userprofile', (req, res, next) => {
       photo: photo_url
     });
   })
-
 })
 
 app.get('/reset', (req, res) => {

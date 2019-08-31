@@ -87,6 +87,10 @@ wishListBtn.addEventListener('click', function (event) {
 })
 
 
+
+const cardContainer = document.getElementById('card-container');
+
+
 likedGiftsBtn.addEventListener('click', function (event) {
   event.preventDefault();
   //add display=none to the content not selected 
@@ -103,6 +107,12 @@ likedGiftsBtn.addEventListener('click', function (event) {
     return;
   })
   likedGiftsBtn.classList.add("active");
+
+  getUserLikes(userId).then(likes => {
+    return likes.data.getUserLikes.map(like => {
+      cardContainer.innerHTML = `${like.title}`
+    })
+  })
 })
 
 
