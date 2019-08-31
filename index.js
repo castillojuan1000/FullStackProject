@@ -9,6 +9,7 @@ const bcrypt = require('bcrypt');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const db = require('./models');
 const app = express();
+const surveySet = require('./surveySet');
 
 //Connect sequelize session to our sequelize db
 var myStore = new SequelizeStore({
@@ -41,7 +42,7 @@ app.get('/', (req, res, next) => {
 
 
 app.get('/signup', (req, res) => {
-  if (req.session.user_id !== undefined) { // check and see if the user has userID
+  if (req.session.user_id == undefined) { // check and see if the user has userID
     res.redirect("/survey"); // then send them to the survey page 
     return;
   }
@@ -61,9 +62,13 @@ app.post('/signup', (req, res, next) => {
 })
 
 app.get('/survey',(req,res) => {
-  if(req.session.user_id != undefined){
+  if(req.session.user_id == undefined){
     res.render('survey');
   }
+})
+app.get('/surveyData', (req,res)=>{
+  // sending back the data in the file 
+  res.json(surveySet);
 })
 
 app.get('/signOut', (req, res, next) => {

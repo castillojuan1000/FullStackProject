@@ -4,241 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="js/survey.js"></script>
-    <script src="styles/survey.css"></script>
+    <link rel="stylesheet" href="styles/survey.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Survey Page</title>
 </head>
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-8">
+            <div class="col ">
                 <h1>Welcome lets get you start with a quick survey!</h1>
+                <button type="button"  class="btn btn-primary" id="start">Start</button>
             </div>
         </div>
-        <div class="row">
-            <div class="col-8 survey-question">
-                <h2>Who are you buying a gift for?</h2>
-
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-8 survey-options">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="firstbox">
-                    <label class="form-check-label" for="firstbox">
-                        Female
-                    </label>
-
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="secondbox">
-                    <label class="form-check-label" for="firstbox">
-                        Male
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="thirdbox">
-                    <label class="form-check-label" for="firstbox">
-                        Child
-                    </label>
-                </div>
-                <button type="button" class="btn btn-primary">Next</button>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-8 survey-question">
-                <h2>Do your friend/Love one like Vintage?</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-8 survey-options">
-                <input type="radio" value=""> Yes</input>
-                <input type="radio" value=""> No</input>
-                <button type="button" class="btn btn-primary">Next</button>
-
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-8 survey-question">
-                <h2>What is your friend favorite hobbies?</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-8 survey-options">
-                <input type="radio" value=""> Art</input>
-                <input type="radio" value=""> Shopping</input>
-                <input type="radio" value=""> Reading</input>
-                <input type="radio" value=""> Making jewelry</input>
-                <input type="radio" value=""> Knitting</input>
-                <input type="radio" value=""> Create Music</input>
-                <input type="radio" value=""> Fashion</input>
-                <button type="button" class="btn btn-primary">Next</button>
-
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-8 survey-question">
-                <h2>What do they need?</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-8 survey-options">
-                <input type="radio" value="">Clothing</input>
-                <input type="radio" value="">Candles</input>
-                <input type="radio" value="">Hygiene Products</input>
-                <input type="radio" value="">Furniture</input>
-                <input type="radio" value="">Glass</input>
-                <input type="radio" value="">Purse</input>
-                <input type="radio" value="">Accessories</input>
-                <input type="radio" value="">Toys</input>
-                <button type="button" class="btn btn-primary">Next</button>
-
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-8 survey-question">
-                <h2>What is your budget?</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-8 survey-options">  <!-- Create a new route  -->
-                <input type="range" min="10" max="1000" step="5" value="" data-orientation="vertical"></input>
-                <button type="button" class="btn btn-primary">Next</button>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-8 survey-question">
-                <h2>Is this a special event?</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-8 survey-options">
-                <input type="radio" value=""> Weddings</input>
-                <input type="radio" value=""> Birthday</input>
-                <input type="radio" value=""> Holidays</input>
-                <button type="button" class="btn btn-primary">Next</button>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-8 survey-question" >
-                <h2>When is your friend birthday?</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-8 survey-options">
-                    <form action=" ">  <!-- Create a new route  -->
-                        Month: <input type="text" name="Month" value=""><br>
-                        Day: <input type="text" name="Day" value=""><br>
-                        Year: <input type="text" name="Day" value=""><br>
-                        <button type="button" class="btn btn-primary">Next</button>
-                    </form>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-8 survey-question">
-                <h2>Do your friend likes books?</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-8 survey-options">
-                <input type="radio" value=""> Yes</input>
-                <input type="radio" value=""> No</input>
-                <button type="button" class="btn btn-primary">Next</button>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-8 survey-question">
-                <h2>What are their favorite products that he/she may run out of?</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-8 survey-options">
-                <input type="radio" value=""> Bath & Beauty</input>
-                <input type="radio" value=""> Ceramics & Pottery </input>
-                <input type="radio" value=""> Accessories </input>
-                <input type="radio" value=""> Jewelry </input>
-                <input type="radio" value=""> Edibles </input>
-                <input type="radio" value=""> Supplies </input>
-                <button type="button" class="btn btn-primary">Next</button>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-8 survey-question">
-                <h2>Do your friend wear Jewelry?</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-8 survey-options">
-                <input type="radio" value=""> Yes</input>
-                <input type="radio" value=""> No</input>
-                <button type="button" class="btn btn-primary">Next</button>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-8 survey-question">
-                <h2>Do your friend own a pet?</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-8 survey-options">
-                <input type="radio" value=""> Yes</input>
-                <input type="radio" value=""> No</input>
-                <button type="button" class="btn btn-primary">Next</button>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-8 survey-question">
-                <h2>What is your favorite color?</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-8 survey-options">
-                    <form action=" ">  <!-- Create a new route  -->
-                      <input type="text" name="color" value=""><br>
-                        <button type="button" class="btn btn-primary">Next</button>
-                    </form>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-8 survey-question">
-                <h2>Is your friend into arts & craft?</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-8 survey-options">
-                <input type="radio" value=""> Yes</input>
-                <input type="radio" value=""> No</input>
-                <button type="button" class="btn btn-primary">Next</button>
-
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-8 survey-question">
-                <h2>Do your friend own a home?</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-8 survey-options">
-                <input type="radio" value=""> Yes</input>
-                <input type="radio" value=""> No</input>
-                <button type="button" class="btn btn-primary">Next</button>
-
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-8 survey-question">
-                <h2>Do your friend enjoy knitting?</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-8 survey-options">
-                <input type="radio" value=""> Yes</input>
-                <input type="radio" value=""> No</input>
-                <button type="button" class="btn btn-primary">Next</button>
-            </div>
-        </div>
+        <br />
+        <br />
+    <form id="surveyForm">
+        
+     </form>
+        
+        <br />
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="js/surveypage.js"></script>
 </body>
 </html>

@@ -1,0 +1,14 @@
+.container {
+    text-align: center;
+    border: 3px solid green;
+
+}
+.survey-options {
+    width: 50%;
+}
+.finish-button {
+    position: absolute;
+}
+.hide {
+    display: none !important;
+}
