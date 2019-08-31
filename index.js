@@ -178,12 +178,13 @@ app.post('/signup', (req, res, next) => {
   req.body.email.toLowerCase();
   var password = req.body.password;
   var name = req.body.name;
+  var email = req.body.email;
   bcrypt.hash(password, 10, (err, hash) => {// this allows the password to be private
     db.users.create({ name: name, email: email, passwordHash: hash }).then((user) => {
       req.session.userId = user.id;
       res.redirect('/')
     }).catch(err => {
-      res.render('signup', { error: 'This email already exist' })
+      res.render('welcome', { error: 'This email already exist' })
     })
   })
 })
