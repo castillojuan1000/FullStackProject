@@ -19,7 +19,7 @@ module.exports = [
     },
     {
         "question": "What is this person's favorite hobby?",
-        "type": "radio",
+        "type": "checkbox",
         "choices": [
             "Art",
             "Shopping",
@@ -32,7 +32,7 @@ module.exports = [
     },
     {
         "question": "Is there anything you think they need?",
-        "type": "radio",
+        "type": "checkbox",
         "choices": [
             "Clothing",
             "Candels",
@@ -73,7 +73,7 @@ module.exports = [
     },
     {
         "question": "What are their favorite products that he/she may run out of?",
-        "type": "radio",
+        "type": "checkbox",
         "choices": [
             "Bath & Beauty",
             "Ceramics & Pottery",

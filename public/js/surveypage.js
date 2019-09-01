@@ -12,8 +12,36 @@ window.addEventListener('DOMContentLoaded', function () {
    });
 
    const survey = document.forms.namedItem('surveyForm');
+   //Store the total number of the question in the totalQuestions variable 
+   var totalQuestions =  document.getElementById(`form${questionNumber}`)
+   //Hide all the questions
+   document.getElementById(`form${questionNumber}`).classList.remove('hide');
+   //show the first question 
+   document.getElementById(`form${questionNumber}`).fadeIn();
+   //attach the click listern to the HTML element with the id of "next"
+   document.getElementById('next').addEventListener('click', function (e) {
+      e.preventDefault();
+      //this will fade out the current question 
+      //putting a function inside of fadeOut calls that function
+      //immdeiately after fadeOut is completed,
+      //this is for a smoother transition animation 
+      document.getElementById(`form${questionNumber}`).fadeOut(function (e){
+         e.preventDefault()
+         //increment the current question by one
+         questionNumber = questionNumber + 1;
 
-   // this will attach an event listener to this survey
+         //if there are no more questions do stuff
+         if(questionNumber == totalQuestions) {
+            var result = sum_values()
+            alert(result);
+         }else {
+            //otherwise show the next question
+            document.getElementById(`form${questionNumber}`).get(questionNumber).fadeIn();
+         }
+      });
+
+   });
+    // this will attach an event listener to this survey
    // we attach it the form because the form is the what emits the event when we click the button 
    // then creating a callback fucntion which will fire and take in the event object 
    survey.addEventListener('submit', function (e) {
@@ -28,26 +56,33 @@ window.addEventListener('DOMContentLoaded', function () {
       console.log(question1, question2, question3, questions);
    });
 
+      
+   });
+
+
+  
+
    // checkbox radio range text
 
 
 
-})
-function showNextQuestion() {
-   document.getElementById(`form${questionNumber}`).classList.toggle('hide');
-   // document.getElementById(`answer${questionNumber}`).classList.toggle('hide');
-   questionNumber++;
-}
+
+// function showNextQuestion() {
+//    document.getElementById(`form${questionNumber}`).classList.toggle('hide');
+//    // document.getElementById(`answer${questionNumber}`).classList.toggle('hide');
+//    questionNumber++;
+// }
 //-----this is grabbing the data from the surveySET file on the backened 
 $.get('/surveyData').then(res => {
    console.log(res);
    const survey = res; // this is grabbing data in the surveySet
-   const container = document.getElementById('surveyForm'); // this is grabbing the container on the HTMl 
+   const container = document.getElementById('surveyForm'); // this is grabbing the container on the HTMl
+   //inside of this container i want to dislpay the questions  
    container.innerHTML = survey.map((Question, i)=>{  
       const{question,type,choices} = Question;
       const questionNum = i
       if(i != 14){
-         var buttonHTML = `<button type="submit" onclick="showNextQuestion()" class="btn btn-primary">Next</button>`
+         var buttonHTML = `<button type="submit" onclick="showNextQuestion()" id="next" class="btn btn-primary">Next</button>`
       }else{
          var buttonHTML = `<button type="submit" class="btn btn-primary">Submit</button>`
       }
@@ -62,7 +97,7 @@ $.get('/surveyData').then(res => {
          break;
          
          case 'range': return `
-         <form class="hide" id="form${questionNum}">
+         <form class="hide slidecontainer " id="form${questionNum}">
          ${renderRangeButton(Question,questionNum)}
          ${buttonHTML}
          </form>
@@ -98,6 +133,13 @@ $.get('/surveyData').then(res => {
          }
       }
    })
+   var slider = document.getElementById("myRange");
+   var output = document.getElementById("demo");
+   output.innerHTML = slider.value;
+
+    slider.oninput = function() {
+     output.innerHTML = this.value;
+     }
 
 
 })
@@ -198,7 +240,8 @@ function renderRangeButton(Question,num){
    const{question,type,choices}= Question;
    var rangeButtonHTML = choices.map((choice)=>{
       return `
-          <input type="${type}" min="10" max="1000" step="5"  name="answer" value="" data-orientation="vertical"></input>
+          <input type="${type}" min="1" max="1000" value="0"  name="answer" class="slider" id="myRange">
+          <p>Value: <span id="demo"></span></p>
       `
    })
    return `
@@ -216,9 +259,7 @@ function renderRangeButton(Question,num){
                 
             </div>
         </div>
-        <br />
-   
-   `
+        <br />`
 }
 
 
