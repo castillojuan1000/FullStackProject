@@ -9,7 +9,7 @@
 .finish-button {
     position: absolute;
 }
-.hide {
+.surveyContainer {
     display: none !important;
 }
 
