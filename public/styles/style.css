@@ -19,7 +19,7 @@ nav {
   padding: 0 5%;
   width: 90%;
   margin: 1px auto;
-  height: 15vh;
+  height: 12vh;
   background: #333;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
@@ -129,5 +129,57 @@ footer a {
 
 .welcomeContainer .btn:active {
   background-color: white;
+}
+
+#menuIcon {
+  display: none;
+}
+
+@media only screen and (max-width: 600px) {
+  nav {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+  }
+  nav .logo {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    height: 10vh;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  nav .nav-links {
+    display: none;
+    width: 100%;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    text-align: center;
+  }
+  nav .nav-links a {
+    width: 100%;
+    border-top: 1px solid black;
+  }
+  #menuIcon {
+    display: block;
+    height: 30px;
+  }
+  #menuIcon path {
+    color: white;
+  }
 }
 /*# sourceMappingURL=style.css.map */
