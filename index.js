@@ -39,6 +39,8 @@ myStore.sync();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
+
+
 //Middleware set up EJS & static
 app.use(express.static(path.join(__dirname, "/public/")));
 app.set("view engine", "ejs");
@@ -48,6 +50,17 @@ app.set("views", "./views");
   !GET ROUTES
   TODO: Implement all of the GET routes
 */
+if (process.env.NODE_ENV == 'production') {
+  app.use(function (req, res, next) {
+    if (req.session.userId !== undefined) {
+      next()
+    } else if (req.path == "/login" || req.path == "/signup") {
+      next()
+    } else {
+      res.redirect('/login');
+    }
+  })
+}
 app.get("/", (req, res, next) => {
   res.redirect("/welcome");
 });
@@ -160,7 +173,7 @@ app.post("/forgotPassword", (req, res) => {
           to be reset. Please click the following link to complete the proccess and reset your password.<br> <a href="http://localhost:3000/reset/?token=${token}">Click here</a><br><br>
           If you did not request this, please ignore this email and your password will not be changed.</p>`
           };
-          await transporter.sendMail(mailOptions, function(err, res) {
+          await transporter.sendMail(mailOptions, function (err, res) {
             if (err) {
               console.error("there was an error: ", err);
             } else {
@@ -204,7 +217,7 @@ app.post("/login", (req, res, next) => {
         error_message: "Please check your username & password"
       });
     } else {
-      bcrypt.compare(password, user.passwordHash, function(err, matched) {
+      bcrypt.compare(password, user.passwordHash, function (err, matched) {
         if (matched) {
           req.session.userId = user.id;
           const { id, name, email, photo_url } = user;
@@ -232,7 +245,7 @@ app.post("/updatePassword", (req, res) => {
     })
     .then(user => {
       if (user.name != undefined) {
-        bcrypt.hash(req.body.password, 10, function(err, hash) {
+        bcrypt.hash(req.body.password, 10, function (err, hash) {
           user.update({
             passwordHash: hash,
             resetPasswordToken: null
@@ -267,7 +280,7 @@ app.post("/upload", (req, res, next) => {
     Body: profilePic.data,
     ACL: "public-read"
   };
-  s3.upload(params, function(Err, data) {
+  s3.upload(params, function (Err, data) {
     if (Err) throw Err;
     console.log(data.Location); //Logs the url to the s3 upload
     db.users.findOne({ where: { id: user_id } }).then(user => {
@@ -279,7 +292,7 @@ app.post("/upload", (req, res, next) => {
 });
 
 //!Server Port
-app.listen(process.env.PORT || 3000, function() {
+app.listen(process.env.PORT || 3000, function () {
   console.log("Server running on port 3000");
 });
 

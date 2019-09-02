@@ -144,8 +144,11 @@ footer a {
     -webkit-box-pack: start;
         -ms-flex-pack: start;
             justify-content: flex-start;
+    -webkit-transition: height 1s;
+    transition: height 1s;
   }
   nav .logo {
+    margin: 5px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -159,7 +162,10 @@ footer a {
             align-items: center;
   }
   nav .nav-links {
-    display: none;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    opacity: 0;
     width: 100%;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -171,15 +177,36 @@ footer a {
     text-align: center;
   }
   nav .nav-links a {
+    display: none;
     width: 100%;
     border-top: 1px solid black;
   }
-  #menuIcon {
+  nav #menuIcon {
     display: block;
     height: 30px;
-  }
-  #menuIcon path {
     color: white;
+    font-size: 25px;
+  }
+  nav #close {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    width: 20px;
+    display: none;
+  }
+  .nav-Open {
+    height: 35vh;
+  }
+  .nav-Open .nav-links {
+    -webkit-transition: opacity 2.5s;
+    transition: opacity 2.5s;
+    opacity: 1;
+  }
+  .nav-Open .nav-links a {
+    display: block;
+  }
+  .nav-Open #close {
+    display: block;
   }
 }
 /*# sourceMappingURL=style.css.map */
