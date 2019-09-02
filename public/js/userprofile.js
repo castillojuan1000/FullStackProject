@@ -35,6 +35,11 @@ overviewBtn.addEventListener('click', function (event) {
   })
 
   overviewBtn.classList.add("active");
+
+
+  getuserSurveys(userId).then(surveys => {
+    console.log(surveys)
+  })
 })
 
 
