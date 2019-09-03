@@ -14,7 +14,7 @@ let largest_id = 0;  // last item rendered
 let results_html = {}; //store key pairs EX: {1 : <div><h1>TSHIRT</h1></div>}
 let listings = {}; //additional information
 
-
+/* 
 let tags = '&tags=';
 (survey.vintage) ? tags += 'vintage' : '';
 if (survey.gender == 'Male'){
@@ -25,8 +25,8 @@ if (survey.gender == 'Male'){
     tags += ',children'
 }
 
-params = {category= ['Art', 'Music', 'Candels'], tags = []}
-
+params = {category= ['Art', 'Music', 'Candels'], tags : []}
+ */
 
 let category_lookup = {};
 /*
