@@ -147,7 +147,7 @@ function renderCheckBox(Question, num) {
    const { question, type, choices } = Question;
    var checkBoxHTML = choices.map((choice) => {
       return `
-            <div>
+            <div class=""d-flex justify-between>
             <input class="form-check-input" type="${type}" value="${choice}" name="answer" id="${choice}box">
             <label class="form-check-label" for="${choice}box">
             ${choice}
@@ -165,7 +165,7 @@ function renderCheckBox(Question, num) {
             <br />
          <div class="row">
                <div class="col" id="answer${num}" >
-               <div class="form-check">
+               <div class="form-check d-flex flex-column">
                ${checkBoxHTML.join('')}
                </div>
                <br />
