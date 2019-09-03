@@ -16,6 +16,7 @@ let listings = {}; //additional information
 
 
 let tags = '&tags=';
+let categories = [];
 (survey.vintage) ? tags += 'vintage' : '';
 if (survey.gender == 'Male'){
     tags += ',men';
@@ -24,6 +25,7 @@ if (survey.gender == 'Male'){
 } else if (survey.gender == 'Child') {
     tags += ',children'
 }
+if 
 
 params = {category= ['Art', 'Music', 'Candels'], tags = []}
 
