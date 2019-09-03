@@ -102,8 +102,11 @@ app.get("/signOut", (req, res, next) => {
 });
 
 app.get("/survey", (req, res, next) => {
-  res.render("survey");
+  const userId = req.session.userId
+  console.log(userId)
+  res.render("survey", { user: userId });
 });
+
 app.get("/surveyData", (req, res, next) => {
   res.json(surveyJSON);
 });

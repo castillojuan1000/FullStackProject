@@ -66,6 +66,7 @@ $(document).ready(async function () {
       surveyContainer.appendChild(questionsContainer)
       //* Add event listener to the start button.
       $('#start').click(function () {
+         document.getElementById('surveyNameForm').style = 'display: none;'
          //* set the display of the survey header to none.
          document.getElementById('surveyHeader').style = 'display: none';
          //! questionNumber is a variable that we intiated at the top and it starts at 1.
@@ -81,7 +82,6 @@ $(document).ready(async function () {
       allQuestions.forEach(form => {
          form.onsubmit = e => {
             e.preventDefault();
-            showNext();
             const questionType = form.getAttribute('data-type')
             const questionText = document.querySelector(`#question${questionNumber} h2`).textContent
             let values;
@@ -99,6 +99,7 @@ $(document).ready(async function () {
                answer: values
             }
 
+            showNext();
             return finishedSurveyData.push(answer)
          }
       })
@@ -130,10 +131,14 @@ function showNext(e) {
    nextQuestion.classList.toggle('surveyContainer')
 }
 
-const container = document.getElementById('surveyForm')
-container.onsubmit = (e) => {
-   e.preventDefault()
-   console.log(finishedSurveyData)
+const mainSurvey = document.getElementById('surveyForm')
+mainSurvey.onsubmit = async function (e) {
+   e.preventDefault();
+   const userId = Number(this.getAttribute('data-user'))
+   const surveyName = this.elements.surveyName.value.toString()
+   const surveyDb = await createUserSurvey(surveyName, userId)
+   const { id } = surveyDb.data.createSurvey;
+   await Promise.all(finishedSurveyData.map(form => createAnswer(form.answer, form.question, id)))
 }
 
 
