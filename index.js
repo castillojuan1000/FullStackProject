@@ -202,7 +202,7 @@ app.post("/signup", (req, res, next) => {
   bcrypt.hash(password, 10, (err, hash) => {
     // this allows the password to be private
     db.users
-      .create({ name: name, email: email, passwordHash: hash })
+      .create({ name: name, email: email.toLowerCase(), passwordHash: hash })
       .then(user => {
         req.session.userId = user.id;
         res.redirect("/");

@@ -1,12 +1,20 @@
 <%- include('partials/header.ejs',{auth:true}) %>
 <div class="container">
     <div class="row">
-        <div class="col-8">
+        <div class="col" id="surveyHeader">
             <h1>Welcome lets get you start with a quick survey!</h1>
+            <button type="button" class="btn btn-primary" id="start">Start</button>
         </div>
-        <button id="startSurvey" class="btn">Start</button>
-        <div class="container"></div>
     </div>
+    <br />
+    <br />
+    <form name="survey-form" id="surveyForm">
+
+    </form>
+
+    <br />
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src=" https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.2/bootstrap-slider.min.js"></script>
+<script src="js/surveypage.js"></script>
 <%- include('partials/footer.ejs', {auth:true}) %>

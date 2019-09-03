@@ -7,7 +7,7 @@ module.exports = [
             "Female",
             "Male",
             "Child"
-        ],
+        ]
     },
     {
         "question": "Does this person like Vintage?",
@@ -19,7 +19,7 @@ module.exports = [
     },
     {
         "question": "What is this person's favorite hobby?",
-        "type": "radio",
+        "type": "checkbox",
         "choices": [
             "Art",
             "Shopping",
@@ -32,7 +32,7 @@ module.exports = [
     },
     {
         "question": "Is there anything you think they need?",
-        "type": "radio",
+        "type": "checkbox",
         "choices": [
             "Clothing",
             "Candels",
@@ -46,7 +46,7 @@ module.exports = [
     {
         "question": "What is your budget?",
         "type": "range",
-        "choices": null
+        "choices": ["budget"]
     },
     {
         "question": "What is the special occasion?",
@@ -60,7 +60,7 @@ module.exports = [
     },
     {
         "question": "What is your friend's date of birth?",
-        "type": "input",
+        "type": "text",
         "choices": ["Month", "Day", "Year"]
     },
     {
@@ -73,7 +73,7 @@ module.exports = [
     },
     {
         "question": "What are their favorite products that he/she may run out of?",
-        "type": "radio",
+        "type": "checkbox",
         "choices": [
             "Bath & Beauty",
             "Ceramics & Pottery",
@@ -100,8 +100,8 @@ module.exports = [
     },
     {
         "question": "What is your favorite color?",
-        "type": "input",
-        "choices": ["text"]
+        "type": "text",
+        "choices": ["color"]
     },
     {
         "question": "Is your friend into arts & craft?",
@@ -128,7 +128,3 @@ module.exports = [
         ]
     }
 ]
-
-
-
-
