@@ -14,10 +14,26 @@ let largest_id = 0;  // last item rendered
 let results_html = {}; //store key pairs EX: {1 : <div><h1>TSHIRT</h1></div>}
 let listings = {}; //additional information
 
+
+let tags = '&tags=';
+(survey.vintage) ? tags += 'vintage' : '';
+if (survey.gender == 'Male'){
+    tags += ',men';
+} else if (survey.gender == 'Female') {
+    tags += ',women'
+} else if (survey.gender == 'Child') {
+    tags += ',children'
+}
+
+params = {category= ['Art', 'Music', 'Candels'], tags = []}
+
+
+let category_lookup = {};
 /*
 On page load bind the search bar with the request function
 */
 $(document).ready(function() {
+    setupPriceSlider()
     GetCategories();
     GenerateRequest()
     setupRedirect();
@@ -47,19 +63,42 @@ $(document).ready(function() {
     })
 })
 
+function setupPriceSlider() {
+    $('.init').text(`$ ${survey.price[0]}`)
+    $('.final').text(`$ ${survey.price[1]}`)
+    $('#price-slider').attr('data-slider-max', survey.price[1])
+    $('#price-slider').attr('data-slider-value', `[${survey.price[0]}, ${survey.price[1]}]`)
+}
+
 function setupPriceFilter(){
     $("#price-slider").slider({}).on('change', function(){
         var newvalue = $(this).attr('value').split(',');
         $('.init').text(`$ ${(newvalue[0])}`);
         $('.final').text(`$ ${newvalue[1] }`);
+        FilterResults(newvalue[0], newvalue[1]);
     });
-    /* $('.filter-section input').on('change', function(){
-        let min = ($('.min-input').val()) ? $('.min-input').val() : 1;
-        let max = $('.max-input').val() ? $('.max-input').val() : 100;
+    $('.filter-section input').on('keyup', function(){
+        let min = ($('.min-input').val()) ? $('.min-input').val() : survey.price[0];
+        let max = $('.max-input').val() ? $('.max-input').val() : survey.price[1];
         if (min = 0) {min++;}
         console.log([parseInt(min),max])
        $('#price-slider').slider('setValue', [parseInt(min),parseInt(max)], true);
-    }) */
+       FilterResults(parseInt(min),parseInt(max));
+    }) 
+}
+
+
+function FilterResults(min, max){
+    $('.item-container').each(function(){
+        let id = $(this).attr('id');
+        let price = $(`#${id} h3`).attr('value');
+        if (price > max | price < min){
+            $(this).addClass('hidden')
+        }
+        else if (price < max & price > min) {
+            $(this).removeClass('hidden');
+        }
+    })
 
 }
 
@@ -90,6 +129,7 @@ function renderCategories(data){
     let categories = data.results;
     let cat_html = '';
     for (i = 0; i < categories.length; i++){
+        category_lookup[categories[i].long_name] = categories[i].category_id
         cat_html += `<li class="list-group-item" id="${categories[i].category_id}"><span><i class="fa fa-check hidden"></i></span>${categories[i].long_name}</li>`
     }
     $('.cat-list').html(`<ul class="categories list-group">CATEGORIES${cat_html}</ul>`);
@@ -200,7 +240,7 @@ function generateResults(result){
                 <a href="${window.location.origin}/loading/${current.listing_id}" target="_blank">
                 <img src="${current.Images[0].url_170x135}"></img>
                 <h1>${current.title}</h1>
-                <h3>$${current.price}</h3>
+                <h3 value="${current.price}">$${current.price}</h3>
                 </a>
             </div>`
         img_url = current.Images[0].url_170x135;

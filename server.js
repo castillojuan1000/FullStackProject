@@ -31,7 +31,8 @@ app.get('/', (req, res, next) => {
 });
 
 app.get('/hello', (req, res, next) => {
-  res.render('home', {})
+  let survey = {price : [10,260]}
+  res.render('home', {survey : survey})
 });
 
 app.get('/loading/:id', (req, res, next) => {

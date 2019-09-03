@@ -11,6 +11,10 @@
     margin-right: 0%;
 }
 
+.hidden {
+    display: none;
+}
+
 /*container for all search results
 */
 .listing-container {
