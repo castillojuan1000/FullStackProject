@@ -19,7 +19,7 @@
     "graphql-tools": "^4.0.5",
     "nodemailer": "^6.3.0",
     "pg": "^7.12.1",
-    "sequelize": "^5.15.1"
+    "sequelize": "^5.17.0"
   },
   "devDependencies": {
     "nodemon": "^1.19.1"
