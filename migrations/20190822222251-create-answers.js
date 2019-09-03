@@ -1,23 +1,29 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('surveys', {
+    return queryInterface.createTable('answers', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
+      question: {
         type: Sequelize.STRING
       },
-      userId: {
+      surveysId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'users',
+          model: 'surveys', // this is refering to surveys ID , in order for the tables to be connected 
           key: 'id'
         }
+      },
+      answer: {
+        type: Sequelize.STRING
+      },
+      require: {
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,
@@ -30,6 +36,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('surveys');
+    return queryInterface.dropTable('answers');
   }
 };

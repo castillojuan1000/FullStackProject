@@ -1,0 +1,10 @@
+<%- include('partials/header.ejs', {auth: false}) %>
+<div class="welcomeContainer">
+    <form action="/updatePassword" method="POST">
+        <input type="email" name="email" value="<%= email %>"" id="" disabled>
+        <label for=" password">New password</label>
+        <input type="password" name="password" id="password">
+        <button class="btn" type="submit">Submit</button>
+    </form>
+</div>
+<%- include('partials/header.ejs', {auth: false}) %>
