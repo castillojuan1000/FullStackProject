@@ -20,10 +20,7 @@ $(document).ready(async function () {
          const { question, type, choices } = Question;
          const questionNum = i + 1
          var buttonHTML = `<button type="submit" id="" class="btn btn-primary next" onClick="">Next</button>`
-         // if (i < survey.length - 1) {
-         // } else {
-         //    var buttonHTML = ``
-         // }
+   
          //creating a if and else statment but using switch method 
          switch (type) {
             case 'checkbox': return `
@@ -73,7 +70,7 @@ $(document).ready(async function () {
          const currentQuestion = document.querySelector(`#form${questionNumber}`);
          //! Toggling the class surveyContainer shows the question with id of form1
          currentQuestion.classList.toggle('surveyContainer')
-         //The surveyContainer has a CSS of display NONE
+         //The surveyContainer has a CSS of display NONE, dont show the first question
       })
       return survey
    }).then((survey) => {
@@ -103,13 +100,13 @@ $(document).ready(async function () {
             return finishedSurveyData.push(answer)
          }
       })
-      var slider = $('#myRange');
-      var output = $('#demo');
-      output.innerHTML = slider.val();
+      var slider = document.getElementById("myRange");
+      var output = document.getElementById("demo");
+      output.innerHTML = slider.value;
 
-      slider.oninput = function () {
-         output.innerHTML = this.val();
-      }
+      slider.oninput = function() {
+         output.innerHTML = this.value;
+       }
       return survey
    })
 })
@@ -241,7 +238,7 @@ function renderRangeButton(Question, num) {
    const { question, type, choices } = Question;
    var rangeButtonHTML = choices.map((choice) => {
       return `
-                <input type="${type}" min="1" max="1000" value="0"  name="answer" class="slider" id="myRange">
+                <input type="${type}" min="0" max="500" value="0"  name="answer" class="slider" id="myRange">
                 <p>Value: <span id="demo"></span></p>
             `
    })
