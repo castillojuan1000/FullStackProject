@@ -491,6 +491,18 @@
 
 }
 
+@media only screen and (max-width: 768px) {
+  .likesContainer{
+		grid-template-columns:  repeat(2, 1fr);
+	}
+}
+
+@media only screen and (min-width: 320px) and (max-width:425px){
+  .likesContainer{
+		grid-template-columns:  1fr;
+	}
+}
+
 .likesContainer .card{
 	margin-top: 2vh;
 	margin-left: 2vw;
