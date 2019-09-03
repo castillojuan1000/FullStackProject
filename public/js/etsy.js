@@ -16,30 +16,67 @@ let listings = {}; //additional information
 On page load bind the search bar with the request function
 */
 $(document).ready(function() {
+    GetCategories();
     GenerateRequest()
-    $('#etsy-search').bind('submit', function() {
-        GenerateRequest()
-        $('#etsy-images').empty();
-        $('<p></p>').text('Searching for '+terms).appendTo('#etsy-images');
-        return false;
-    })
     setupRedirect();
+    setupCategorySelection();
+    setupPriceFilter();
+    $('.toggle-btn').click(function(){
+        $('.filter-section').toggleClass('hide-show');
+    })
 })
 
 
-/*
-For some stupid reason the Etsy API provides more information about a listing in the search endpoint
-as apposed to the search item by id... I found a jquery plugin to redirect to a post request
-with a object of relevent info to listing page//
-*/
-/* function setupRedirect() {
-    $(document).on('click', '.item-container', function(){
-        let item_dict = listings[$(this).attr('id')]
-        $.redirect(
-            `${window.location.origin}/listing/${$(this).attr('id')}`, item_dict
-        )
+function setupPriceFilter(){
+    $("#price-slider").slider({}).on('change', function(){
+        var newvalue = $(this).attr('value').split(',');
+        $('.init').text(`$ ${(newvalue[0])}`);
+        $('.final').text(`$ ${newvalue[1] }`);
+    });
+    /* $('.filter-section input').on('change', function(){
+        let min = ($('.min-input').val()) ? $('.min-input').val() : 1;
+        let max = $('.max-input').val() ? $('.max-input').val() : 100;
+        if (min = 0) {min++;}
+        console.log([parseInt(min),max])
+       $('#price-slider').slider('setValue', [parseInt(min),parseInt(max)], true);
+    }) */
+
+}
+
+function setupCategorySelection(){
+    $(document).on('click', '.list-group-item', function(){
+        $(this).find('.fa').toggleClass('hidden')
     })
-} */
+}
+
+function GetCategories() {
+    let url = 'https://openapi.etsy.com/v2/taxonomy/categories.js?api_key=93jqxwkb7mqslat27k6yi91j'
+    $.ajax({
+        url: url,
+        type: 'GET',
+        dataType: 'jsonp',
+        success: function(data) {
+            if (data.ok) {
+                if (data.count > 0){
+                    return renderCategories(data)
+                    }
+            }
+        }
+    })
+
+}
+
+function renderCategories(data){
+    let categories = data.results;
+    let cat_html = '';
+    for (i = 0; i < categories.length; i++){
+        cat_html += `<li class="list-group-item" id="${categories[i].category_id}"><span><i class="fa fa-check hidden"></i></span>${categories[i].long_name}</li>`
+    }
+    $('.cat-list').html(`<ul class="categories list-group">CATEGORIES${cat_html}</ul>`);
+    return 
+}
+
+
 function setupRedirect() {
     $(document).on('click', '.item-container', function(){
         let item_dict = listings[$(this).attr('id')]
@@ -51,19 +88,19 @@ function setupRedirect() {
             data: JSON.stringify(item_dict),
             success: function(data) {
                 console.log(1)
-                console.log(2)
             }
         })
     })
 }
+
 /*
 Get the search terms from the bar and generate a url
 */
 function GenerateRequest() {
     //terms = $('#etsy-terms').val();
-    terms = 'tshirts';
+    terms = 'vintage';
     etsyURL = "https://openapi.etsy.com/v2/listings/active.js?keywords="+
-        terms+"&limit=12&includes=Images:1&api_key="+api_key;
+        terms+"&limit=50&includes=Images:1&api_key="+api_key;
     return SearchEtsy(etsyURL);
 }
 
@@ -74,10 +111,12 @@ datatype has to be jsonp due to issues with cross origin requests and brower non
 all responses will be a 200 so data has to be validated
 */
 function SearchEtsy(etsyURL){
+
     $.ajax({
         url: etsyURL,
         dataType: 'jsonp',
         success: function(data) {
+            console.log(data)
             ValidateResponse(data)
         }
     })
@@ -110,24 +149,43 @@ function ValidateResponse(data) {
 object is iterated through and to create a list of elements...
 then it is passed to the render function...
 */
+function findVintage(is_vintage){
+    let vintage = '';
+    let vint_as_int =  parseInt(is_vintage.substring(0, is_vintage.length - 1));
+    (is_vintage == 'before_2000') ? vintage = 'vintage' : '';
+
+    if (vint_as_int < 1990) {
+        vintage = 'vintage';
+    }
+    return vintage;
+}
+
+
 function generateResults(result){
     let items = result.results
     for (i = 0; i < items.length; i++) {
         
         largest_id++;
         let current = items[i]
+        let handmade;
+        let vintage;
+        (current.who_made == 'i_did') ?  handmade = 'hand_made' : ""
+        vintage = findVintage(current.when_made);
+
+        console.log(vintage, handmade)
         results_html[largest_id] = `
-            <div class="item-container" id="${current.listing_id}">
+            <div class="item-container ${handmade} ${vintage}" id="${current.listing_id}">
                 <a href="${window.location.origin}/loading/${current.listing_id}" target="_blank">
                 <img src="${current.Images[0].url_170x135}"></img>
                 <h1>${current.title}</h1>
-                <h3>${current.price}</h3>
+                <h3>$${current.price}</h3>
                 </a>
             </div>`
         img_url = current.Images[0].url_170x135;
         var regex = /170x135/gi;
         img_url = img_url.replace(regex, '570xN')
         listings[current.listing_id] = {
+            listing_id : current.listing_id,
             category_id : current.category_id, 
             category_path: current.category_path, 
             has_variations: current.has_variations, 
@@ -141,7 +199,11 @@ function generateResults(result){
             title: current.title,
             price: current.price,
             image: img_url,
-            url : current.url}
+            url : current.url,
+            description: current.description,
+            tags: current.tags,
+            taxonomy_path: current.taxonomy_path,
+        }
         renderResults(results_html[largest_id]);
     
     }

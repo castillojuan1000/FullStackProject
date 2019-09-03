@@ -2,14 +2,18 @@
     <title>Gift Finder</title>
 
     <head>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+            <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">
             <link href='https://fonts.googleapis.com/css?family=Dosis' rel='stylesheet' type='text/css'>
+            
             <link  rel="stylesheet" type="text/css" href="/css/listing.css">
         
         <script type="text/javascript">
-            var info = <%- JSON.stringify(info) %>
-            console.log(info)
+            var info = <%- JSON.stringify(info) %>;
         </script>
-        <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
         <script type="text/javascript" src="/js/listing.js"></script>
     </head>
     <body>
@@ -18,8 +22,73 @@
             <div class="title-header">
                 <h1><%- info.title %></h1>
             </div>
-            <div class="image-holder">
-                <img src="<%= info.image %>">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 col-sm-12 image-holder">
+                            <div class="carousel slide">
+                                    <ol class="carousel-indicators">
+                                    </ol>
+                                    <div class="carousel-inner">
+                                    </div>
+                                    <a class="carousel-control-prev" role="button" >
+                                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                      <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" role="button">
+                                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                      <span class="sr-only">Next</span>
+                                    </a>
+                                  </div>
+                        <div class="images">
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-12 col-sm-12 order-first">
+                        <div class="product-description">
+                            <div class="card">
+                                    <div class="card-header">
+                                            <h1 class="card-title">$ <%- info.price %></h1>
+                                    </div>
+                                    <div class="card-body description-holder">
+                                      <p class="card-text description">With supporting text below as a natural lead-in to additional content.</p>
+                                    </div>
+                                  </div>
+                                </div>
+                            <div class="tag-holder">
+                            </div>
+                    </div>
+                    <div class="col-lg-3 col-md-12 col-sm-12">
+                        <div class="card">
+                                <div class="card-header">
+                                        <div class="usr-profile">
+                                                <div class="user-img"></div>
+                                                <div class="mini-profile">
+                                                    <div class="username"></div>
+                                                    <div class="star-container" id="something"></div>
+                                                </div>
+                                            </div>
+                                </div>
+                                <div class="card-body shop-profile">
+                                </div>
+                                <div class="card-footer"></div>
+                                </div>
+                        <div class="call-to-action order-second">
+                            <button href="" class="btn buy">Buy Now</button>
+                            <button href="#" class="btn ">Add To Gifts</button>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="row">
+                            <div class="col-lg-12">
+                                    <div class="jumbotron jumbotron-fluid">
+                                            <div class="container">
+                                              <h1 class="display-4">Fluid jumbotron</h1>
+                                              <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+                                            </div>
+                                          </div>
+
+                    </div>
+                </div>
             </div>
         </div>
     </body>
