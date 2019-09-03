@@ -60,7 +60,6 @@ $(document).ready(async function () {
       //*Add the submit button outside of the questionsContainer
       formsHTML.push('<button id="submitSurvey"  style="display: none;" class="btn btn-primary">Submit</button>')
       questionsContainer.innerHTML = formsHTML.join('')
-
       //! Finally when all of the questions have been added to the questionsContainer
       //! Append the question container into the surveyContainer.
       surveyContainer.appendChild(questionsContainer)
@@ -117,6 +116,7 @@ $(document).ready(async function () {
 
 //After the document is ready we add an event listener to the start button.
 
+document.getElementById('surveyForm').
 
 function showNext(e) {
    // e.preventDefault()
@@ -138,7 +138,19 @@ mainSurvey.onsubmit = async function (e) {
    const surveyName = this.elements.surveyName.value.toString()
    const surveyDb = await createUserSurvey(surveyName, userId)
    const { id } = surveyDb.data.createSurvey;
-   await Promise.all(finishedSurveyData.map(form => createAnswer(form.answer, form.question, id)))
+   await Promise.all(finishedSurveyData.map(form => createAnswer(form.answer, form.question, id)));
+   await Promise.all(finishedSurveyData.map(form => {
+      switch (form.question) {
+         case 'What is the special occasion?': return addSurveyCategory(form.answer, id)
+            break;
+         case 'Is your friend into arts & crafts?': return addSurveyCategory('arts', id);
+            break;
+         case 'Does your friend own a home?': return addSurveyCategory('Home', id);
+            break;
+         case "What is this person's favorite hobby?": return addSurveyCategory(form.answer, id)
+      }
+   }))
+   location = `/search/${id}`
 }
 
 

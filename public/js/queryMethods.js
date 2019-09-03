@@ -52,6 +52,25 @@ async function getuserSurveys(id) {
   return response.json();
 }
 
+async function getSurveyById(id) {
+  const query = `query{
+    getSurvey(id: ${id}){
+    name
+    answers{
+      question
+      answer
+    }
+    categories{
+      name
+    }
+  }  
+}`;
+
+  opts.body = JSON.stringify({ query })
+  const response = await fetch(url, opts)
+  return response.json()
+}
+
 //* Mutations
 
 /**

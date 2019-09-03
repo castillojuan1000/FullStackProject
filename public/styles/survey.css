@@ -1,7 +1,6 @@
 .container {
     text-align: center;
-    border: 3px solid green;
-
+    /* border: 3px solid green; */
 }
 .survey-options {
     width: 50%;

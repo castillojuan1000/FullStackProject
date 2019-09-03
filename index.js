@@ -299,26 +299,27 @@ app.post("/upload", (req, res, next) => {
   });
 });
 
-app.get('/search', (req, res, next) => {
+app.get('/search/:id', (req, res, next) => {
   let auth;
   (req.session.userId) ? auth = true : auth = false
+  const surveyId = req.params.id
   req.session.store = {};
   req.session.loading = {};
-  res.render('home', {auth: auth})
+  res.render('home', { auth: auth, survey: surveyId })
 });
 
 app.get('/loading/:id', (req, res, next) => {
   let id = req.params['id'];
   req.session.loading.id = true
-  res.render('loading', {id : id});
+  res.render('loading', { id: id });
 });
 
 app.get('/listing/:id', (req, res, next) => {
-    let auth;
-    (req.session.userId) ? auth = true : auth = false;
+  let auth;
+  (req.session.userId) ? auth = true : auth = false;
 
-    let id = req.params.id;
-    res.render('listing', {info : req.session.store[id], auth : auth});
+  let id = req.params.id;
+  res.render('listing', { info: req.session.store[id], auth: auth });
 });
 
 app.get('/check/:id', (req, res, next) => {
@@ -326,10 +327,10 @@ app.get('/check/:id', (req, res, next) => {
   console.log(id)
   if (req.session.store.hasOwnProperty(id)) {
     console.log("id in req.session")
-    res.json({success : true, status : 200});
+    res.json({ success: true, status: 200 });
   } else {
     console.log("its not")
-    res.json({success : false, status : 401});
+    res.json({ success: false, status: 401 });
   }
 });
 
@@ -337,7 +338,7 @@ app.post('/listing/:id', jsonParser, (req, res, next) => {
   let id = req.params.id;
   console.log(id)
   req.session.store[id] = req.body;
-  res.json({success : "Updated Successfully", status : 200});
+  res.json({ success: "Updated Successfully", status: 200 });
 });
 
 
