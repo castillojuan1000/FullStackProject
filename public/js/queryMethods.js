@@ -66,8 +66,8 @@ async function getuserSurveys(id) {
 async function addUserLike(listing, imgUrl, userId, title, price) {
   const query = `mutation{
         createUserLike(listing: ${Number(
-          listing
-        )} imgUrl: "${imgUrl}" userId: ${Number(
+    listing
+  )} imgUrl: "${imgUrl}" userId: ${Number(
     userId
   )} title: "${title}" price: ${Number(price)}){
             id
@@ -100,23 +100,15 @@ async function removeUserLike(id) {
  * @returns {Object} :Returns an object of the newly created
  */
 async function createUserSurvey(name, userId) {
-  if (typeof name === String && typeof userId === Number) {
-    const query = `mutation{
+  const query = `mutation{
             createSurvey(name: "${name}", user_id: ${Number(userId)}){
                 name
                 id
             }
         }`;
-    opts.body = JSON.stringify({ query });
-    const response = await fetch(url, opts);
-    return response.json();
-  } else {
-    if (typeof name != String) {
-      console.log(`Error name is of type ${typeof name} not String!`);
-    } else if (typeof userId != Number) {
-      console.log(`Error name is of type ${typeof userId} not Number!`);
-    }
-  }
+  opts.body = JSON.stringify({ query });
+  const response = await fetch(url, opts);
+  return response.json();
 }
 
 /**
