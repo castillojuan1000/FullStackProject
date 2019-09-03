@@ -38,15 +38,16 @@ async function getUserLikes(id) {
  */
 async function getUserSurveys(id) {
   const query = `query{
-        getUserSurveys(userId: ${id}){
-        id
+    getSurvey(id: ${id}){
+      answers{
+        question
+        answer
+      }
+      categories{
         name
-        answers{
-          question
-          answer
-        }
-      }  
-    }`;
+      }
+    }
+  }`;
   opts.body = JSON.stringify({ query });
   const response = await fetch(url, opts);
   return response.json();
