@@ -116,7 +116,6 @@ $(document).ready(async function () {
 
 //After the document is ready we add an event listener to the start button.
 
-document.getElementById('surveyForm').
 
 function showNext(e) {
    // e.preventDefault()
@@ -168,7 +167,7 @@ function renderCheckBox(Question, num) {
             <label class="form-check-label mr-2" for="${choice}box">
             ${choice}
             </label>
-            <input class="form-check-input" type="${type}" value="${choice}" name="answer" id="${choice}box">
+            <input class="form-check-input ml-0" type="${type}" value="${choice}" name="answer" id="${choice}box">
             </div>
             `
    })
