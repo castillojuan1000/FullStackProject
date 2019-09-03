@@ -191,13 +191,11 @@ app.post("/forgotPassword", (req, res) => {
   }
 });
 app.post("/signup", (req, res, next) => {
-  req.body.email.toLowerCase();
-  var password = req.body.password;
-  var name = req.body.name;
+  const { name, password, email } = req.body
   bcrypt.hash(password, 10, (err, hash) => {
     // this allows the password to be private
     db.users
-      .create({ name: name, email: email, passwordHash: hash })
+      .create({ name: name, email: email.toLowerCase(), passwordHash: hash })
       .then(user => {
         req.session.userId = user.id;
         res.redirect("/");
