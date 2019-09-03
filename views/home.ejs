@@ -1,6 +1,7 @@
 <html>
     <title>Gift Finder</title>
     <head>
+            <%- include partials/header.ejs %>
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.2/css/bootstrap-slider.css" crossorigin="anonymous">
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -17,7 +18,6 @@
     </head>
     <body>
             <button class="btn toggle-btn"><i class="fa fa-filter"></i></button>
-        <div class="header"></div>
         <div class="main-content">
             <div class="filter-section hide-show">
                 <div class="container">
@@ -58,15 +58,15 @@
                     </div>
                 <div class="filter item-type">
                     <h3>Item Type</h3>
-                    <label class="container check-container" value="`">All Items
+                    <label class="container check-container" value="0">All Items
                             <input class='box' type="checkbox" checked="checked">
                             <span class="checkmark"></span>
                         </label>
-                    <label class="container check-container" value="`">Vintage
+                    <label class="container check-container" value="1">Vintage
                         <input class='box' type="checkbox" checked="checked">
                         <span class="checkmark"></span>
                     </label>
-                    <label class="container check-container" value="`">Hand Made
+                    <label class="container check-container" value="2">Hand Made
                             <input class='box' type="checkbox" checked="checked">
                             <span class="checkmark"></span>
                     </label>

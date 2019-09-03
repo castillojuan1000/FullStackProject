@@ -1,14 +1,4 @@
-.header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    background: RGBA(0, 0, 0, .8);
-    border-bottom: 3px solid RGBA(188, 191, 80, 1);
-    height: 8vh;
-}
+
 
 body {
     background-color: #f5fcf7;
@@ -18,7 +8,7 @@ body {
 }
 
 .main-content {
-    padding-top: 8vh;
+    padding-top: 4vh;
     text-align: center;
     margin-left: 5%;
     margin-right: 5%;

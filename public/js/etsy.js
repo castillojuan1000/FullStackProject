@@ -1,5 +1,7 @@
-const api_key = '93jqxwkb7mqslat27k6yi91j';
+//import { load } from "protobufjs";
 
+const api_key = '93jqxwkb7mqslat27k6yi91j';
+let loading = false;
 //API pagination vars
 
 var COUNT_PER_PAGE; //results returned at once
@@ -24,8 +26,26 @@ $(document).ready(function() {
     $('.toggle-btn').click(function(){
         $('.filter-section').toggleClass('hide-show');
     })
-})
+    $('.check-container').click(function(event){
+       alert(0)
+        let value = $(this).attr('value');
+       event.preventDefault();
+       $(this).prev('input').prop("checked", function(i, val){
+           alert(1)
+            return !val;
+       })
+       if ($(this).prev('input').prop("checked") == "checked") {
+           alert(2)
+       }
+    })
 
+    $(window).scroll(function() {
+        if ($(window).scrollTop() > ($(document).height())*0.65 && loading==false){
+            loading = true;
+            GenerateRequest();
+        }
+    })
+})
 
 function setupPriceFilter(){
     $("#price-slider").slider({}).on('change', function(){
@@ -80,7 +100,9 @@ function renderCategories(data){
 function setupRedirect() {
     $(document).on('click', '.item-container', function(){
         let item_dict = listings[$(this).attr('id')]
-        url = `${window.location.origin}/listing/${$(this).attr('id')}`
+        let id = $(this).attr('id').toString();
+        let base = window.location.origin.toString();
+        let url = `${base}/listing/${id}`
         $.ajax({
             url: url,
             type: 'POST',
