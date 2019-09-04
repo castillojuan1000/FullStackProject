@@ -338,6 +338,7 @@ app.post('/listing/:id', jsonParser, (req, res, next) => {
   let id = req.params.id;
   console.log(id)
   req.session.store[id] = req.body;
+  console.log(req.session.store[id])
   res.json({ success: "Updated Successfully", status: 200 });
 });
 

@@ -247,7 +247,5 @@ render here
 function renderResults(item) {
     $('#etsy-images').append(item);
 }
-Collapse
-
 
 

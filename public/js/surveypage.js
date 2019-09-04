@@ -140,7 +140,7 @@ mainSurvey.onsubmit = async function (e) {
    await Promise.all(finishedSurveyData.map(form => createAnswer(form.answer, form.question, id)));
    await Promise.all(finishedSurveyData.map(form => {
       switch (form.question) {
-         case 'What is the special occasion?': return addSurveyCategory(form.answer, id)
+         case 'What is the special occasion?': return addSurveyCategory(form.answer, id);
             break;
          case 'Is your friend into arts & crafts?': return addSurveyCategory('arts', id);
             break;
