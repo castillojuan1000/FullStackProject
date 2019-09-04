@@ -299,13 +299,13 @@ app.post("/upload", (req, res, next) => {
   });
 });
 
-app.get('/search/:id', (req, res, next) => {
+app.get('/search', (req, res, next) => {
   let auth;
   (req.session.userId) ? auth = true : auth = false
-  const surveyId = req.params.id
+  let survey = { price: [10, 250] }
   req.session.store = {};
   req.session.loading = {};
-  res.render('home', { auth: auth, survey: surveyId })
+  res.render('home', { auth: auth, survey: survey })
 });
 
 app.get('/loading/:id', (req, res, next) => {
