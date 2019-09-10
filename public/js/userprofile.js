@@ -35,6 +35,11 @@ overviewBtn.addEventListener('click', function (event) {
   })
 
   overviewBtn.classList.add("active");
+
+
+  getuserSurveys(userId).then(surveys => {
+    console.log(surveys)
+  })
 })
 
 
@@ -87,6 +92,10 @@ wishListBtn.addEventListener('click', function (event) {
 })
 
 
+
+
+
+likesContainer = document.getElementById('likesContainer');
 likedGiftsBtn.addEventListener('click', function (event) {
   event.preventDefault();
   //add display=none to the content not selected 
@@ -103,10 +112,27 @@ likedGiftsBtn.addEventListener('click', function (event) {
     return;
   })
   likedGiftsBtn.classList.add("active");
+
+  getUserLikes(userId).then(likes => {
+    return likesContainer.innerHTML = likes.data.getUserLikes.map(like => {
+      return `
+      <div class="card" style="width: 18rem;">
+      <img src="${like.imgUrl}" class="card-img-top" alt="..." style="height: 23vh">
+      <div class="card-body">
+        <h5 class="card-title" style="font-weight:bold">${like.title}</h5>
+        <h5 class="card-title">Listing ID: ${like.listingId}</h5>
+        <h5 class="card-title" style="font-weight: bold">$${like.price}</h5>
+
+
+      </div>
+    </div>
+      `
+    }).join("")
+  })
 })
 
 
-//! changing profile pic
+//! 
 
 
 

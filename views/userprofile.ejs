@@ -27,12 +27,12 @@
         <!-- SIDEBAR MENU -->
         <div class="profile-usermenu">
           <ul class="nav">
-            <li class="overview active" id="overview">
+            <li class="overview" id="overview">
               <a href="#">
                 <i class="glyphicon glyphicon-home"></i>
                 Overview </a>
             </li>
-            <li class=" account-settings" id="account-settings">
+            <li class=" account-settings active" id="account-settings">
               <a href="#">
                 <i class="glyphicon glyphicon-user"></i>
                 Account Settings </a>
@@ -80,11 +80,11 @@
     <div class="col-md-9">
       <div class="profile-content">
 
-        <div class="overview-content" id="overview-content">
+        <div class="overview-content" id="overview-content" style="display: none">
           overview content goes here...
         </div>
 
-        <div class="accountSettings-content" id="accountSettings-content" style="display: none">
+        <div class="accountSettings-content" id="accountSettings-content">
           <% include partials/userprofile_settings.ejs %>
         </div>
 
@@ -93,7 +93,9 @@
         </div>
 
         <div class="likedGifts-content" id="likedGifts-content" style="display: none">
-          Liked Gifts content goes here...
+          <div class="likesContainer" id="likesContainer">
+
+          </div>
         </div>
 
       </div>

@@ -112,7 +112,12 @@ app.get("/surveyData", (req, res, next) => {
 });
 
 //******* User Profile Routes ********************
+<<<<<<< HEAD
+app.get('/userprofile', (req, res, next) => {
+  //* Getting user ID from session
+=======
 app.get("/userprofile", (req, res, next) => {
+>>>>>>> master
   user_id = req.session.userId;
   db.users.findByPk(user_id).then(user => {
     console.log(user.phoroUrl);
@@ -123,8 +128,28 @@ app.get("/userprofile", (req, res, next) => {
       id: user_id,
       photo: photo_url
     });
+<<<<<<< HEAD
+  })
+})
+
+app.get('/reset', (req, res) => {
+  db.users.findOne({
+    where: {
+      resetPasswordToken: req.query.token,
+    }
+  }).then(user => {
+    if (user == null) {
+      res.json('Password reset link is invalid or has expired')
+    } else {
+      req.session.userId = user.id
+      res.render('reset', { email: user.email })
+    }
+  })
+})
+=======
   });
 });
+>>>>>>> master
 
 app.get("/reset", (req, res) => {
   db.users
@@ -202,6 +227,19 @@ app.post("/signup", (req, res, next) => {
   var email = req.body.email.toLowerCase();
   var password = req.body.password;
   var name = req.body.name;
+<<<<<<< HEAD
+  var email = req.body.email;
+  bcrypt.hash(password, 10, (err, hash) => {// this allows the password to be private
+    db.users.create({ name: name, email: email, passwordHash: hash }).then((user) => {
+      req.session.userId = user.id;
+      res.redirect('/')
+    }).catch(err => {
+      res.render('welcome', { error: 'This email already exist' })
+    })
+  })
+})
+
+=======
   bcrypt.hash(password, 10, (err, hash) => {
     // this allows the password to be private
     db.users
@@ -215,6 +253,7 @@ app.post("/signup", (req, res, next) => {
       });
   });
 });
+>>>>>>> master
 
 app.post("/login", (req, res, next) => {
   const email = req.body.email.toLowerCase();
