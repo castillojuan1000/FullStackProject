@@ -8,7 +8,6 @@ These instructions will get you a copy of the project up and running on your loc
 
 Installing
 Clone repository
-To run backend server from project root run
 npm install
 
 
