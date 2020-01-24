@@ -1,44 +1,45 @@
 {
-  "name": "fullstackproject",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "dependencies": {
-    "animejs": "^3.1.0",
-    "apollo-server-express": "^2.9.0",
-    "aws-sdk": "^2.520.0",
-    "bcrypt": "^3.0.6",
-    "body-parser": "^1.19.0",
-    "connect-session-sequelize": "^6.0.0",
-    "crypto": "^1.0.1",
-    "dotenv": "^8.1.0",
-    "ejs": "^2.6.2",
-    "express": "^4.17.1",
-    "express-session": "^1.16.2",
-    "graphql": "^14.5.1",
-    "graphql-tools": "^4.0.5",
-    "nodemailer": "^6.3.0",
-    "nodeman": "^1.1.2",
-    "pg": "^7.12.1",
-    "sequelize": "^5.17.0",
-    "sequelize-cli": "^5.5.1"
-  },
-  "devDependencies": {
-    "nodemon": "^1.19.1"
-  },
-  "scripts": {
-    "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/castillojuan1000/FullStackProject.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/castillojuan1000/FullStackProject/issues"
-  },
-  "homepage": "https://github.com/castillojuan1000/FullStackProject#readme"
+	"name": "fullstackproject",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"dependencies": {
+		"animejs": "^3.1.0",
+		"apollo-server-express": "^2.9.0",
+		"aws-sdk": "^2.520.0",
+		"bcrypt": "^3.0.6",
+		"body-parser": "^1.19.0",
+		"connect-session-sequelize": "^6.0.0",
+		"crypto": "^1.0.1",
+		"dotenv": "^8.1.0",
+		"ejs": "^2.6.2",
+		"express": "^4.17.1",
+		"express-session": "^1.16.2",
+		"graphql": "^14.5.1",
+		"graphql-tools": "^4.0.5",
+		"nodemailer": "^6.3.0",
+		"nodeman": "^1.1.2",
+		"pg": "^7.12.1",
+		"sequelize": "^5.17.0",
+		"sequelize-cli": "^5.5.1"
+	},
+	"devDependencies": {
+		"nodemon": "^1.19.1"
+	},
+	"scripts": {
+		"start": "node index.js",
+		"dev": "nodemon index.js",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/castillojuan1000/FullStackProject.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/castillojuan1000/FullStackProject/issues"
+	},
+	"homepage": "https://github.com/castillojuan1000/FullStackProject#readme"
 }
